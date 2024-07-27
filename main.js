@@ -1,6 +1,6 @@
- import { connect } from "./helpers/connect.js";
 
- console.log(process.env.MONGO_USER);
+import { pelicula } from "./js/modules/peliculas.js";
+
 // connect
 
 // async function main() {
@@ -18,3 +18,6 @@
 
 // main();
 
+let obj = new pelicula() 
+
+console.table(await obj.getAllEvents())
