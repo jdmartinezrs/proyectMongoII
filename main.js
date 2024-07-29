@@ -1,5 +1,5 @@
 
-import { pelicula } from "./js/modules/peliculas.js";
+import { pelicula } from "./js/modules/pelicula.js";
 
 // connect
 
@@ -20,4 +20,6 @@ import { pelicula } from "./js/modules/peliculas.js";
 
 let obj = new pelicula() 
 
-console.table(await obj.getAllEvents())
+// console.table(await obj.getAllMoviesAndFunctionsInfo())
+
+console.table(await obj.getAnEspecificMovieInfo())
