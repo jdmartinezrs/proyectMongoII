@@ -14,14 +14,38 @@ export class asiento extends connect{
         asiento.instance = this;
         return this;
     }
-    //ejercicio 1
+  
+//para Verificar Disponibilidad de Asientos:** Permitir la consulta de la disponibilidad de asientos en una sala para una proyección específica.
+    async getAllTSeatsByFunction() {//muestra tods lo asientos por id
+      let res;
+      try {
+        // Abre la conexión a la base de datos si no está abierta
+        await this.conexion.connect();
+        
+        res = await this.collection.aggregate([
+          { $match: { id_funcion: new ObjectId("64a7e409f7a42a24c8d7e825"),
+            estado:"Por Asignar"
+           } }, // Filtra por id_funcion
+          { $project: { _id: 0, fila: 1, codigo: 1, estado: 1, id_funcion: 1 } } // Proyección de campos
+        ]).toArray(); // Convierte el cursor en un array
+    
+      } catch (err) {
+        console.error("Error al obtener los asientos:", err);
+      } finally {
+        // Cierra la conexión
+        await this.conexion.close();
+      }   
+      return res;
+    }
+
+
 
     async updateTheStatusOfASeat(){
         let res = await this.collection.updateOne(
             { _id: new ObjectId("64a7e409f7a42a24c8d7e82b") },
             { 
               $set: { 
-                estado: "Asignado",
+                estado: "Reservado",
                 id_funcion: new ObjectId("64a7e409f7a42a24c8d7e828") // Reemplaza con el nuevo ObjectId
               }
             }
@@ -34,5 +58,52 @@ export class asiento extends connect{
             message: "Asiento actualizado con éxito"
         };
     }
+
+    
+    async getAllTSeatsByFunction() {//muestra tods lo asientos por id
+      let res;
+      try {
+        // Abre la conexión a la base de datos si no está abierta
+        await this.conexion.connect();
+        
+        res = await this.collection.aggregate([
+          // Unir la colección de asientos con la colección de funciones
+          {
+            $lookup: {
+              from: 'funcion', // Nombre de la colección de funciones
+              localField: 'id_funcion', // Campo en la colección de asientos
+              foreignField: '_id', // Campo en la colección de funciones
+              as: 'funcion' // Alias para el resultado de la unión
+            }
+          },
+          {
+            $unwind: '$funcion' // Desenrollar el array de funciones para obtener documentos individuales
+          },
+          {
+            $match: {
+              estado: 'Reservado' // Filtrar solo los asientos con estado 'Reservado'
+            }
+          },
+          {
+            $project: {
+              _id: 0, // Excluir el campo _id
+              fecha_hora_inicio: '$funcion.fecha_hora_inicio', // Incluir la fecha y hora de inicio
+              fecha_hora_fin: '$funcion.fecha_hora_fin' // Incluir la fecha y hora de fin
+            }
+          }
+        ]).toArray();
+    
+      } catch (err) {
+        console.error("Error al obtener los asientos:", err);
+      } finally {
+        // Cierra la conexión
+        await this.conexion.close();
+      }   
+      return res;
+    }
+
+   
+
+
 
 }
