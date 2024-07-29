@@ -1,25 +1,20 @@
 
 import { pelicula } from "./js/modules/pelicula.js";
+import { asiento } from "./js/modules/asiento.js";
 
-// connect
 
-// async function main() {
-//     try {
-        
-//         const dbConnect = new connect();
-        
-//         await dbConnect.testConnection();
-        
+//caso de uso 1
 
-//     } catch (error) {
-//         console.error("Error durante la prueba de conexión:", error);
-//     }
-// }
+// let obj = new pelicula() 
 
-// main();
-
-let obj = new pelicula() 
+//Obtener informacion de todas la películas
 
 // console.table(await obj.getAllMoviesAndFunctionsInfo())
 
-console.table(await obj.getAnEspecificMovieInfo())
+//Obtener informacion de una película en especifico
+
+// console.table(await obj.getAnEspecificMovieInfo())
+
+let obj1 = new asiento() 
+
+console.log(await obj1.updateTheStatusOfASeat())
