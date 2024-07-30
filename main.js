@@ -1,7 +1,7 @@
-
+import { ObjectId } from "mongodb";
 import { Pelicula } from "./js/modules/pelicula.js";
 import { Asiento } from "./js/modules/asiento.js";
-
+import { Cliente } from "./js/modules/cliente.js";
 
 // ! MOVIES CASES
 
@@ -14,19 +14,16 @@ import { Asiento } from "./js/modules/asiento.js";
 
 // ! 1.2 Obtener informacion de una película en especifico
 
- //console.table(await obj.getAnEspecificMovieInfo())
-
-
-
+//  console.table(await obj.getAnEspecificMovieInfo())
 
 
 
 // ! SEATS CASES
 
 // ! 2.2 Checks seat availability for a specific screening.
-/** 
-let obj = new Asiento() 
 
+//let obj = new Asiento() //todo: uncomment this before running each movies call
+/** 
 const asientoInstance = new Asiento();
 const idFuncion = "64a7e409f7a42a24c8d7e826"; // todo: Replace with your actual id_funcion value
 asientoInstance.getAllSeatsByFunction(idFuncion).then(seats => {
@@ -35,6 +32,7 @@ asientoInstance.getAllSeatsByFunction(idFuncion).then(seats => {
     console.error("Error:", err);
 });
 */
+
 
 // ! 3.1 Reserve Seats: Allow the selection and reservation of seats for a specific screening.
 /** 
@@ -66,6 +64,7 @@ asientoInstance.getAllTSeatsReservedByFunction(seatId).then(result => {
 });
 */
 
+
 /** 
 // !3.2 Cancel Seat Reservations: Allow the cancellation of a seat reservation already made.
 const asientoInstance = new Asiento();
@@ -85,4 +84,8 @@ asientoInstance.setACancelationtoAReservedSeat(seatId).then(result => {
 //cliente
 //console.log(await obj.getAllClient)
 
+//! CUSTOMER CASES
 
+let obj = new Cliente()
+
+console.log( await obj.createClientAndUser({ _id: new ObjectId(),nombre:"chencho",apellido:"Rojas",nick:"machine",email:"azrojas123@example.com","telefono":"3001235678",tipo_de_cliente:"Regular",descuento:0,codigo_tarjeta:"",fecha_expedicion: null,estado: "", cedula: 1098780865, rol: "Usuario Estandar"}))
