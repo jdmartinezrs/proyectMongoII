@@ -1,19 +1,25 @@
 
-import { pelicula } from "./js/modules/pelicula.js";
+import { Pelicula } from "./js/modules/pelicula.js";
 import { Asiento } from "./js/modules/asiento.js";
 
 
-//caso de uso 1
+// ! MOVIES CASES
 
-// let obj = new pelicula() 
 
-//Obtener informacion de todas la películas
+//  let obj = new Pelicula() //todo: uncomment this before running each movies call
+
+//! 1.1 Obtener informacion de todas la películas
 
 // console.table(await obj.getAllMoviesAndFunctionsInfo())
 
-//Obtener informacion de una película en especifico
+// ! 1.2 Obtener informacion de una película en especifico
 
-// console.table(await obj.getAnEspecificMovieInfo())
+ //console.table(await obj.getAnEspecificMovieInfo())
+
+
+
+
+
 
 // ! SEATS CASES
 
@@ -73,13 +79,10 @@ asientoInstance.setACancelationtoAReservedSeat(seatId).then(result => {
 */
 
 
-//ver todas lo asientos por funcion
-// console.log(await obj1.getAllTSeatsByFunction())
+
 
 
 //cliente
 //console.log(await obj.getAllClient)
 
 
-//permite ver la sala y hora en donde fue reservado
-// console.log(await obj.getAllTSeatsByFunction())
