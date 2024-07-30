@@ -11,7 +11,9 @@ export class pelicula extends connect{
         pelicula.instance = this;
         return this;
     }
-    //ejercicio 1
+    
+
+
 
     async getAllMoviesAndFunctionsInfo(){
         let res = await this.collection.aggregate([
@@ -48,6 +50,11 @@ export class pelicula extends connect{
         this.conexion.close();
         return res;
     }
+
+
+
+    
+
     async getAnEspecificMovieInfo(){
         let res = await this.collection.aggregate([
             {
