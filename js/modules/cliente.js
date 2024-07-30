@@ -44,14 +44,14 @@ export class Cliente extends connect {
         fecha_expedicion, estado, cedula, rol
       });
 
-      // Uncomment this section if you want to create a user in MongoDB
-      /*
+      
+      
       const usuario = await this.db.command({
         createUser: apodo,
         pwd: `${cedula}`, // Use 'cedula' as the password
         roles: [{ role: rol, db: process.env.MONGO_DB }]
       });
-      */
+      
 
       // Return success message
       return {

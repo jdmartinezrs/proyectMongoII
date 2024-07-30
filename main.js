@@ -85,9 +85,12 @@ let obj = new Cliente()
 //console.log(await obj.getAllClient)
 
 //! CUSTOMER CASES
-/** 
 
 
-console.log( await obj.createClientAndUser({ _id: new ObjectId(),nombre:"chencho",apellido:"Rojas",nick:"machine",email:"azrojas123@example.com","telefono":"3001235678",tipo_de_cliente:"Regular",descuento:0,codigo_tarjeta:"",fecha_expedicion: null,estado: "", cedula: 1098780865, rol: "Usuario Estandar"}))
-*/
-console.log(await obj.getUsersInfo())
+
+console.log( await obj.createClientAndUser({ _id: new ObjectId(),nombre:"dvd",apellido:"Rojas",nick:"macone",email:"azrohhh103@example.com","telefono":"3001235678",tipo_de_cliente:"Regular",descuento:0,codigo_tarjeta:"",fecha_expedicion: null,estado: "", cedula: 1099999999, rol: "usuarioEstandar"}))
+
+
+
+
+// console.log(await obj.getUsersInfo())
