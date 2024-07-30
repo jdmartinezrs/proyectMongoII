@@ -10,6 +10,7 @@ export class Cliente extends connect {
    * @param {Object} client - The client information to be created.
    * @returns {Object} - Status message and data if applicable.
    */
+
   async createClientAndUser(client) {
     let {
       nombre, apellido, nick: apodo, email, telefono,
@@ -19,9 +20,9 @@ export class Cliente extends connect {
 
     try {
       // Open database connection
-     
+
       const collection = this.db.collection('cliente');
-      
+
       // Check if a user with the same nickname, email, or cedula already exists
       const condicion = await collection.find({
         $or: [
@@ -30,7 +31,7 @@ export class Cliente extends connect {
           { email: email }
         ]
       }).toArray();
-      
+
       // If a user exists, return a message with the existing user data
       if (condicion.length) {
         return { mensaje: "El usuario ya existe", data: condicion };
@@ -38,7 +39,7 @@ export class Cliente extends connect {
 
       // Insert the new client into the 'cliente' collection
       const res = await collection.insertOne({
-       _id: new ObjectId(), nombre, apellido, nick: apodo, email, telefono,
+        _id: new ObjectId(), nombre, apellido, nick: apodo, email, telefono,
         tipo_de_cliente, descuento, codigo_tarjeta,
         fecha_expedicion, estado, cedula, rol
       });
@@ -62,74 +63,36 @@ export class Cliente extends connect {
       return { mensaje: "Error al crear el cliente", error };
     }
   }
+
+  async getUsersInfo() {
+    const collection = this.db.collection('cliente');
+      let res = await collection.aggregate([
+        {
+          $match: {
+            _id: new ObjectId("66a9120b7cc3f9740722df8e") // Match the specific user by _id
+          }
+        },
+        {
+          $project: { 
+            _id: 0, // Exclude the _id field
+            nombre: 1, 
+            apellido: 1, 
+            nick: 1, 
+            email: 1, 
+            telefono: 1, 
+            tipo_de_cliente: 1, 
+            descuento: 1, 
+            codigo_tarjeta: 1, 
+            fecha_expedicion: 1, 
+            estado: 1, 
+            cedula: 1, 
+            rol: 1 // Include all fields to view
+          }
+        }
+      ]).toArray(); 
+      return res;
+    }
 }
-
-// export class Cliente extends connect {
-
-//   /**
-//    * Creates a new client and user in the database.
-//    * @param {Object} client - The client information to be created.
-//    * @returns {Object} - Status message and data if applicable.
-//    */
-//   async createClientAndUser(client) {
-//       let { nombre, apellido, nick: apodo, email, telefono, tipo_de_cliente, descuento, codigo_tarjeta, fecha_expedicion, estado, cedula, rol } = client;
-
-//       // Open database connection
-//       await this.connectOpen();
-//       const collection = this.db.collection('cliente');
-      
-//       // Check if a user with the same nickname, email, or cedula already exists
-//       const condicion = await collection.find({
-//           $or: [
-//               { nick: apodo },
-//               { cedula: cedula },
-//               { email: email }
-//           ]
-//       }).toArray();
-      
-//       // If a user exists, return a message with the existing user data
-//       if (condicion.length) return { mensaje: "El usuario ya existe", data: condicion };
-
-//       // Insert the new client into the 'cliente' collection
-//       const res = await collection.insertOne({
-//           nombre,
-//           apellido,
-//           nick: apodo,
-//           email,
-//           telefono,
-//           tipo_de_cliente,
-//           descuento,
-//           codigo_tarjeta,
-//           fecha_expedicion,
-//           estado,
-//           cedula, // Ensure 'cedula' is included
-//           rol
-//       });
-
-// /** 
-//       // Create a new user in MongoDB with the provided role
-//       const usuario = await this.db.command({
-//           createUser: apodo,
-//           pwd: `${cedula}`, // Use 'cedula' as the password
-//           roles: [
-//               { role: rol, db: process.env.MONGO_DB }
-//           ]
-//       });
-
-//       // Return success message
-//       return {
-//           success: res.acknowledged && usuario.ok,
-//           mensaje: "Cliente y usuario creados con éxito"
-//       };
-//   }
-
-// */
-
-// }
-// }
-
-
-
 
 
 
