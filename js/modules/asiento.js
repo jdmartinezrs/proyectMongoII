@@ -42,11 +42,11 @@ export class asiento extends connect{
 
     async updateTheStatusOfASeat(){
         let res = await this.collection.updateOne(
-            { _id: new ObjectId("64a7e409f7a42a24c8d7e82b") },
+            { _id: new ObjectId("64a7e409f7a42a24c8d7e82b") },//
             { 
               $set: { 
                 estado: "Reservado",
-                id_funcion: new ObjectId("64a7e409f7a42a24c8d7e828") // Reemplaza con el nuevo ObjectId
+                id_funcion: new ObjectId("64a7e409f7a42a24c8d7e828") // añadir una funcion a un asiento en especifico
               }
             }
           );
@@ -59,7 +59,10 @@ export class asiento extends connect{
         };
     }
 
+  
     
+//permite ver la sala y hora en donde fue reservado
+
     async getAllTSeatsByFunction() {//muestra tods lo asientos por id
       let res;
       try {
@@ -81,14 +84,16 @@ export class asiento extends connect{
           },
           {
             $match: {
-              estado: 'Reservado' // Filtrar solo los asientos con estado 'Reservado'
+              _id: new ObjectId("64a7e409f7a42a24c8d7e82b") 
             }
           },
           {
             $project: {
               _id: 0, // Excluir el campo _id
               fecha_hora_inicio: '$funcion.fecha_hora_inicio', // Incluir la fecha y hora de inicio
-              fecha_hora_fin: '$funcion.fecha_hora_fin' // Incluir la fecha y hora de fin
+              fecha_hora_fin: '$funcion.fecha_hora_fin',
+               // Incluir la fecha y hora de fin
+               "funcion.sala":1
             }
           }
         ]).toArray();

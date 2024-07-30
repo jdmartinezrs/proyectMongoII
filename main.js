@@ -26,4 +26,6 @@ let obj = new asiento()
 //cliente
 //console.log(await obj.getAllClient)
 
-console.log(await obj.getAllTSeatsByFunction())
+78
+//permite ver la sala y hora en donde fue reservado
+// console.log(await obj.getAllTSeatsByFunction())
