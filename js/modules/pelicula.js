@@ -30,46 +30,41 @@ export class Pelicula extends connect {
  * @function
  * @returns {Promise<Object[]>} - A promise that resolves to an array of objects containing movie information and showtimes.
  */
-async getAllMoviesAndFunctionsInfo() {
-    let res = await this.collection.aggregate([
-        // Match documents in the movie collection with the status 'En cartelera' (In theaters)
-        {
-            $match: { estado: "En cartelera" } // ! it matches movies with "En cartelera" status , feel free to look for "Próximamente" or "Retirada de Cartelera" 
-        },
-        // Perform a lookup to join the movie collection with the showtimes collection
-        {
-            $lookup: {
-                from: "funcion", // The showtimes collection
-                localField: "_id", // Field in the movie collection
-                foreignField: "id_pelicula", // Field in the showtimes collection
-                as: "funciones" // Alias for the result of the join
+    async getAllMoviesAndFunctionsInfo(status) {
+        let res = await this.collection.aggregate([
+            {
+                $match: { estado: status }
+            },
+            {
+                $lookup: {
+                    from: "funcion",
+                    localField: "_id",
+                    foreignField: "id_pelicula",
+                    as: "funciones"
+                }
+            },
+            {
+                $unwind: "$funciones"
+            },
+            {
+                $project: {
+                    _id: 0,
+                    titulo: 1,
+                    genero: 1,
+                    duracion: 1,
+                    estado: 1,
+                    sala: "$funciones.sala",
+                    "funciones.fecha_hora_inicio": 1,
+                    "funciones.fecha_hora_fin": 1
+                }
             }
-        },
-        // Unwind the funciones array to output individual showtime documents
-        {
-            $unwind: "$funciones"
-        },
-        // Project the desired fields in the result
-        {
-            $project: {
-                _id: 0, // Exclude the _id field from the result
-                titulo: 1, // Include the movie title
-                genero: 1, // Include the movie genre
-                duracion: 1, // Include the movie duration
-                estado: 1, // Include the movie status
-                "sala": "$funciones.sala", // Include the showtime room
-                "funciones.fecha_hora_inicio": 1, // Include the showtime start date and time
-                "funciones.fecha_hora_fin": 1 // Include the showtime end date and time
-            }
-        }
-    ]).toArray();
+        ]).toArray();
+        
+        this.conexion.close();
+        
+        return res;
+    }
     
-    // Close the database connection
-    this.conexion.close();
-    
-    // Return the result with movie information and showtimes
-    return res;
-}
 
 
 
@@ -83,46 +78,41 @@ async getAllMoviesAndFunctionsInfo() {
  * @function
  * @returns {Promise<Object[]>} - A promise that resolves to an array of objects containing movie information and showtimes.
  */
-async getAnEspecificMovieInfo() {
+   async getAnEspecificMovieInfo(nombre) {
     let res = await this.collection.aggregate([
-        // Match documents in the movie collection with the title 'El Gran Escape'
         {
-            $match: { titulo: 'El Gran Escape' }// !here you inser the "movie title", to see the information about it 
+            $match: { titulo: nombre } // Usa el parámetro titulo
         },
-        // Perform a lookup to join the movie collection with the showtimes collection
         {
             $lookup: {
-                from: "funcion", // The showtimes collection
-                localField: "_id", // Field in the movie collection
-                foreignField: "id_pelicula", // Field in the showtimes collection
-                as: "funciones" // Alias for the result of the join
+                from: "funcion",
+                localField: "_id",
+                foreignField: "id_pelicula",
+                as: "funciones"
             }
         },
-        // Unwind the funciones array to output individual showtime documents
         {
             $unwind: "$funciones"
         },
-        // Project the desired fields in the result
         {
             $project: {
-                _id: 0, // Exclude the _id field from the result
-                titulo: 1, // Include the movie title
-                genero: 1, // Include the movie genre
-                duracion: 1, // Include the movie duration
-                estado: 1, // Include the movie status
-                "sala": "$funciones.sala", // Include the showtime room
-                "funciones.fecha_hora_inicio": 1, // Include the showtime start date and time
-                "funciones.fecha_hora_fin": 1 // Include the showtime end date and time
+                _id: 0,
+                titulo: 1,
+                genero: 1,
+                duracion: 1,
+                estado: 1,
+                sala: "$funciones.sala",
+                "funciones.fecha_hora_inicio": 1,
+                "funciones.fecha_hora_fin": 1
             }
         }
     ]).toArray();
     
-    // Close the database connection
     this.conexion.close();
     
-    // Return the result with movie information and showtimes
     return res;
 }
+
 
     
     

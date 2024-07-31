@@ -6,15 +6,22 @@ import { Cliente } from "./js/modules/cliente.js";
 // ! MOVIES CASES
 
 
-//  let obj = new Pelicula() //todo: uncomment this before running each movies call
+// let objp = new Pelicula() //todo: uncomment this before running each movies call
 
 //! 1.1 Obtener informacion de todas la películas
 
-// console.table(await obj.getAllMoviesAndFunctionsInfo())
+// const status = "En cartelera"; 
+// const moviesAndFunctions = await objp.getAllMoviesAndFunctionsInfo(status);
+// console.table(moviesAndFunctions);
+ 
 
 // ! 1.2 Obtener informacion de una película en especifico
 
-//  console.table(await obj.getAnEspecificMovieInfo())
+
+
+// const titulo = "El Gran Escape"; // O cualquier otro título de 
+// const specificMovie = await objp. getAnEspecificMovieInfo(titulo);
+// console.table(specificMovie);
 
 
 
@@ -80,7 +87,7 @@ asientoInstance.setACancelationtoAReservedSeat(seatId).then(result => {
 
 
 
-let obj = new Cliente()
+// let obj = new Cliente()
 //cliente
 //console.log(await obj.getAllClient)
 
@@ -88,9 +95,25 @@ let obj = new Cliente()
 
 
 
+/**
 console.log( await obj.createClientAndUser({ _id: new ObjectId(),nombre:"dvd",apellido:"Rojas",nick:"macone",email:"azrohhh103@example.com","telefono":"3001235678",tipo_de_cliente:"Regular",descuento:0,codigo_tarjeta:"",fecha_expedicion: null,estado: "", cedula: 1099999999, rol: "usuarioEstandar"}))
+ */
 
 
 
 
-// console.log(await obj.getUsersInfo())
+
+// ! Get info of a User
+const cliente = new Cliente();
+
+const userId = "66a966ce18a924c1093f439f";
+const userInfo = await cliente.getUserInfo(userId);
+console.log(userInfo);
+
+
+
+// ! Get User by rol
+
+//  console.log(await obj.getUserByRoles())
+
+

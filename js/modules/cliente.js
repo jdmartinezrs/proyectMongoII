@@ -5,6 +5,7 @@ import { log } from "console";
 
 
 export class Cliente extends connect {
+
   /**
    * Creates a new client and user in the database.
    * @param {Object} client - The client information to be created.
@@ -64,113 +65,96 @@ export class Cliente extends connect {
     }
   }
 
-  async getUsersInfo() {
-    const collection = this.db.collection('cliente');
-      let res = await collection.aggregate([
-        {
+
+
+async getUserInfo(userId) {
+  const collection = this.db.collection('cliente');
+  let res = await collection.aggregate([
+      {
           $match: {
-            _id: new ObjectId("66a9120b7cc3f9740722df8e") // Match the specific user by _id
+              _id: new ObjectId(userId) // Usa el parámetro userId en lugar del ID fijo
           }
-        },
-        {
+      },
+      {
           $project: { 
-            _id: 0, // Exclude the _id field
-            nombre: 1, 
-            apellido: 1, 
-            nick: 1, 
-            email: 1, 
-            telefono: 1, 
-            tipo_de_cliente: 1, 
-            descuento: 1, 
-            codigo_tarjeta: 1, 
-            fecha_expedicion: 1, 
-            estado: 1, 
-            cedula: 1, 
-            rol: 1 // Include all fields to view
+              _id: 0, // Excluir el campo _id
+              nombre: 1, 
+              apellido: 1, 
+              nick: 1, 
+              email: 1, 
+              telefono: 1, 
+              tipo_de_cliente: 1, 
+              descuento: 1, 
+              codigo_tarjeta: 1, 
+              fecha_expedicion: 1, 
+              estado: 1, 
+              cedula: 1, 
+              rol: 1 // Incluir todos los campos a visualizar
           }
-        }
-      ]).toArray(); 
-      return res;
-    }
+      }
+  ]).toArray(); 
+  return res;
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-export class Cliente extends connect{
- 
-
-    async createClientAndUser(client) {
-      let {nombre,apellido,nick:apodo,email,telefono,tipo_de_cliente,descuento,codigo_tarjeta,fecha_expedicion,estado,codigo,rol}=client;
-      await this.connectOpen();
-      const collection = this.db.collection('cliente');
-      const condicion = await collection.find({
-        $or:[
-            {nick: apodo},
-            {cedula:codigo},
-            {email: correo}
-        ]
-     }).toArray();
-     if(condicion.length) return {mensaje: "El usuario ya existe", data: condicion}
-     const res = await collection.insertOne({
-
-        nombre,
-        apellido,
-        nick: apodo,
-        email,
-        telefono,
-        tipo_de_cliente,
-        descuento,
-        codigo_tarjeta,
-        fecha_expedicion,
-        estado,
-        codigo,
-        rol
-     });
-
-     const usuario = await this.db.command({
-      createUser: apodo,
-      pwd:`${codigo}`,
-      roles:[
-        {role: rol, db: process.env.MONGO_DB}
-      ]
-
-
-
-     });
-
-      
-    }
-
 
     
+// async getUserByRoles() {
+//   const collection = this.db.collection('cliente');
+//   let res = await collection.aggregate([
+//       {
+//           $match: {
+//               rol: "usuarioEstandar"
+//           }
+//       },
+//       {
+//           $project: { 
+//               _id: 0,
+//               nombre: 1, 
+//               apellido: 1, 
+//               nick: 1, 
+//               email: 1, 
+//               telefono: 1, 
+//               tipo_de_cliente: 1, 
+//               descuento: 1, 
+//               codigo_tarjeta: 1, 
+//               fecha_expedicion: 1, 
+//               estado: 1, 
+//               cedula: 1, 
+//               rol: 1
+//           }
+//       }
+//   ]).toArray(); 
+//   return res;
+// }
+
 }
-    */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
