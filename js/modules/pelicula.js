@@ -6,22 +6,22 @@ import { connect } from "../../helpers/connect.js";
  * @extends connect
  */
 export class Pelicula extends connect {
-    static instance; // Holds the singleton instance of the Pelicula class
-    collection; // MongoDB collection for movies
+    static instance;
+    collection;
 
     /**
      * Creates an instance of the Pelicula class.
      * @constructor
      */
     constructor() {
-        super(); // Call the parent class constructor
-        this.collection = this.db.collection('pelicula'); // Initialize the 'pelicula' collection
-        Pelicula.instance = this; // Set the singleton instance
-        return this; // Return the instance of the class
+        super();
+        this.collection = this.db.collection('pelicula');
+        Pelicula.instance = this;
+        return this;
     }
 
 
-    
+
 
     /**
  * Retrieves information about all movies currently in theaters along with their scheduled showtimes.
@@ -59,61 +59,58 @@ export class Pelicula extends connect {
                 }
             }
         ]).toArray();
-        
+
         this.conexion.close();
-        
+
         return res;
     }
-    
 
 
 
- 
 
 
-   /**
- * 1.2 Retrieves specific information about a movie along with its scheduled showtimes.
- * 
- * @async
- * @function
- * @returns {Promise<Object[]>} - A promise that resolves to an array of objects containing movie information and showtimes.
- */
-   async getAnEspecificMovieInfo(nombre) {
-    let res = await this.collection.aggregate([
-        {
-            $match: { titulo: nombre } // Usa el parámetro titulo
-        },
-        {
-            $lookup: {
-                from: "funcion",
-                localField: "_id",
-                foreignField: "id_pelicula",
-                as: "funciones"
+
+
+    /**
+  * 1.2 Retrieves specific information about a movie along with its scheduled showtimes.
+  * 
+  * @async
+  * @function
+  * @returns {Promise<Object[]>} - A promise that resolves to an array of objects containing movie information and showtimes.
+  */
+    async getAnEspecificMovieInfo(nombre) {
+        let res = await this.collection.aggregate([
+            {
+                $match: { titulo: nombre } // Usa el parámetro titulo
+            },
+            {
+                $lookup: {
+                    from: "funcion",
+                    localField: "_id",
+                    foreignField: "id_pelicula",
+                    as: "funciones"
+                }
+            },
+            {
+                $unwind: "$funciones"
+            },
+            {
+                $project: {
+                    _id: 0,
+                    titulo: 1,
+                    genero: 1,
+                    duracion: 1,
+                    estado: 1,
+                    sala: "$funciones.sala",
+                    "funciones.fecha_hora_inicio": 1,
+                    "funciones.fecha_hora_fin": 1
+                }
             }
-        },
-        {
-            $unwind: "$funciones"
-        },
-        {
-            $project: {
-                _id: 0,
-                titulo: 1,
-                genero: 1,
-                duracion: 1,
-                estado: 1,
-                sala: "$funciones.sala",
-                "funciones.fecha_hora_inicio": 1,
-                "funciones.fecha_hora_fin": 1
-            }
-        }
-    ]).toArray();
-    
-    this.conexion.close();
-    
-    return res;
-}
+        ]).toArray();
 
+        this.conexion.close();
 
-    
-    
+        return res;
+    }
+
 }

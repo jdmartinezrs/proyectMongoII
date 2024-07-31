@@ -20,11 +20,11 @@ export class Cliente extends connect {
     } = client;
 
     try {
-      // Open database connection
+
 
       const collection = this.db.collection('cliente');
 
-      // Check if a user with the same nickname, email, or cedula already exists
+
       const condicion = await collection.find({
         $or: [
           { nick: apodo },
@@ -33,99 +33,98 @@ export class Cliente extends connect {
         ]
       }).toArray();
 
-      // If a user exists, return a message with the existing user data
+
       if (condicion.length) {
         return { mensaje: "El usuario ya existe", data: condicion };
       }
 
-      // Insert the new client into the 'cliente' collection
+
       const res = await collection.insertOne({
         _id: new ObjectId(), nombre, apellido, nick: apodo, email, telefono,
         tipo_de_cliente, descuento, codigo_tarjeta,
         fecha_expedicion, estado, cedula, rol
       });
 
-      
-      
+
+
       const usuario = await this.db.command({
         createUser: apodo,
-        pwd: `${cedula}`, // Use 'cedula' as the password
+        pwd: `${cedula}`,
         roles: [{ role: rol, db: process.env.MONGO_DB }]
       });
-      
 
-      // Return success message
+
+
       return {
         success: res.acknowledged,
-        mensaje: "Cliente creado con éxito" // Adjusted message since user creation is commented out
+        mensaje: "USER creado con éxito"
       };
     } catch (error) {
       console.error("Error creating client and user:", error);
-      return { mensaje: "Error al crear el cliente", error };
+      return { mensaje: "Error al crear el user", error };
     }
   }
 
 
 
-async getUserInfo(userId) {
-  const collection = this.db.collection('cliente');
-  let res = await collection.aggregate([
+  async getUserInfo(userId) {
+    const collection = this.db.collection('cliente');
+    let res = await collection.aggregate([
       {
-          $match: {
-              _id: new ObjectId(userId) // Usa el parámetro userId en lugar del ID fijo
-          }
+        $match: {
+          _id: new ObjectId(userId)
+        }
       },
       {
-          $project: { 
-              _id: 0, // Excluir el campo _id
-              nombre: 1, 
-              apellido: 1, 
-              nick: 1, 
-              email: 1, 
-              telefono: 1, 
-              tipo_de_cliente: 1, 
-              descuento: 1, 
-              codigo_tarjeta: 1, 
-              fecha_expedicion: 1, 
-              estado: 1, 
-              cedula: 1, 
-              rol: 1 // Incluir todos los campos a visualizar
-          }
+        $project: {
+          _id: 0,
+          nombre: 1,
+          apellido: 1,
+          nick: 1,
+          email: 1,
+          telefono: 1,
+          tipo_de_cliente: 1,
+          descuento: 1,
+          codigo_tarjeta: 1,
+          fecha_expedicion: 1,
+          estado: 1,
+          cedula: 1,
+          rol: 1
+        }
       }
-  ]).toArray(); 
-  return res;
+    ]).toArray();
+    return res;
 
-}
+  }
 
-    
-// async getUserByRoles() {
-//   const collection = this.db.collection('cliente');
-//   let res = await collection.aggregate([
-//       {
-//           $match: {
-//               rol: "usuarioEstandar"
-//           }
-//       },
-//       {
-//           $project: { 
-//               _id: 0,
-//               nombre: 1, 
-//               apellido: 1, 
-//               nick: 1, 
-//               email: 1, 
-//               telefono: 1, 
-//               tipo_de_cliente: 1, 
-//               descuento: 1, 
-//               codigo_tarjeta: 1, 
-//               fecha_expedicion: 1, 
-//               estado: 1, 
-//               cedula: 1, 
-//               rol: 1
-//           }
-//       }
-//   ]).toArray(); 
-//   return res;
-// }
+  async getUserByRoles(rol) {
+    const collection = this.db.collection('cliente');
+    let res = await collection.aggregate([
+      {
+        $match: {
+          rol: rol
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          nombre: 1,
+          apellido: 1,
+          nick: 1,
+          email: 1,
+          telefono: 1,
+          tipo_de_cliente: 1,
+          descuento: 1,
+          codigo_tarjeta: 1,
+          fecha_expedicion: 1,
+          estado: 1,
+          cedula: 1,
+          rol: 1
+        }
+      }
+    ]).toArray();
+    return res;
+  }
 
 }
 
