@@ -4,13 +4,19 @@ import { log } from "console";
 
 
 
+/**
+ * @class
+ * Represents the Cliente class, which manages client-related operations in the database.
+ */
 export class Cliente extends connect {
 
   /**
-   * Creates a new client and user in the database.
-   * @param {Object} client - The client information to be created.
-   * @returns {Object} - Status message and data if applicable.
-   */
+     * Creates a new client and user in the database.
+     * @async
+     * @function
+     * @param {Object} client - The client information to be created. The object should include fields such as nombre, apellido, nick, email, telefono, tipo_de_cliente, descuento, codigo_tarjeta, fecha_expedicion, estado, cedula, and rol.
+     * @returns {Object} - An object containing a status message and data if applicable.
+     */
 
   async createClientAndUser(client) {
     let {
@@ -66,7 +72,13 @@ export class Cliente extends connect {
   }
 
 
-
+  /**
+    * Retrieves information about a specific user from the database.
+    * @async
+    * @function
+    * @param {ObjectId} userId - The ObjectId of the user to retrieve.
+    * @returns {Promise<Object[]>} - A promise that resolves to an array of objects containing user information.
+    */
   async getUserInfo(userId) {
     const collection = this.db.collection('cliente');
     let res = await collection.aggregate([
@@ -97,6 +109,14 @@ export class Cliente extends connect {
 
   }
 
+
+  /**
+  * Retrieves information about users with a specific role.
+  * @async
+  * @function
+  * @param {string} rol - The role of the users to retrieve.
+  * @returns {Promise<Object[]>} - A promise that resolves to an array of objects containing user information with the specified role.
+  */
   async getUserByRoles(rol) {
     const collection = this.db.collection('cliente');
     let res = await collection.aggregate([

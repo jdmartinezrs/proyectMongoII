@@ -7,6 +7,7 @@ ObjectId
 /**
  * * this is my Asiento class
  * @class
+ * Represents the Asiento class, which manages seat operations in the database.
  */
 export class Asiento extends connect {
     static instance;
@@ -44,7 +45,6 @@ export class Asiento extends connect {
         }
         return res;
     }
-
 
 
 

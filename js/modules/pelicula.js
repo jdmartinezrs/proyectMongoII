@@ -1,6 +1,6 @@
 import { connect } from "../../helpers/connect.js";
 
-/*Ejemplo*/
+
 /**
  * 1.1 Class representing a connection to the 'pelicula' collection in the database.
  * @extends connect
@@ -21,14 +21,13 @@ export class Pelicula extends connect {
     }
 
 
-
-
     /**
- * Retrieves information about all movies currently in theaters along with their scheduled showtimes.
- * 
- * @async
- * @function
- * @returns {Promise<Object[]>} - A promise that resolves to an array of objects containing movie information and showtimes.
+    * Retrieves information about all movies currently in theaters along with their scheduled showtimes.
+     * 
+     * @async
+     * @function
+     * @param {string} status - The status of the movies to retrieve (e.g., 'En cartelera').
+     * @returns {Promise<Object[]>} - A promise that resolves to an array of objects containing movie information and showtimes.
  */
     async getAllMoviesAndFunctionsInfo(status) {
         let res = await this.collection.aggregate([
@@ -67,17 +66,14 @@ export class Pelicula extends connect {
 
 
 
-
-
-
-
     /**
-  * 1.2 Retrieves specific information about a movie along with its scheduled showtimes.
-  * 
-  * @async
-  * @function
-  * @returns {Promise<Object[]>} - A promise that resolves to an array of objects containing movie information and showtimes.
-  */
+    * Retrieves specific information about a movie along with its scheduled showtimes.
+     * 
+     * @async
+     * @function
+     * @param {string} nombre - The title of the movie to retrieve information for.
+     * @returns {Promise<Object[]>} - A promise that resolves to an array of objects containing movie information and showtimes.
+     */
     async getAnEspecificMovieInfo(nombre) {
         let res = await this.collection.aggregate([
             {
