@@ -5,26 +5,19 @@ const { ObjectId } = require("mongodb");
 
 
 
-const clienteInstance = Cliente.getInstance();
+Pelicula.getInstance()
+.then(peliculaInstance => {
+    // Verifica si la instancia es válida
+    if (!peliculaInstance) {
+        throw new Error('Pelicula instance is not available');
+    }
 
-    clienteInstance.createClientAndUser({
-        _id: new ObjectId(),
-        nombre: "lilkev",
-        apellido: "galvinis",
-        nick: "kevscript",
-        email: "campuslands@example.com",
-        telefono: "1010101010",
-        tipo_de_cliente: "",
-        descuento: 0,
-        codigo_tarjeta: "",
-        fecha_expedicion: null,
-        estado: "",
-        cedula: 10987564879,
-        rol: "Administrador"
-    })
-    .then(result => {
-        console.log(result);
-    })
-    .catch(error => {
-        console.error("Error:", error);
-    });
+    // Llama al método con el estado deseado
+    return peliculaInstance.getAllMoviesAndFunctionsInfo('En cartelera');
+})
+.then(moviesAndFunctions => {
+    console.log('Movies and Functions Info:', moviesAndFunctions);
+})
+.catch(error => {
+    console.error('Error initializing Pelicula:', error);
+});
