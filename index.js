@@ -3,21 +3,14 @@ const Cliente = require('./server/clientRoles');
 const Asiento = require('./server/seats')
 const { ObjectId } = require("mongodb");
 
+const asientoInstance = new Asiento();
+const seatId = "64a7e409f7a42a24c8d7e879";
 
+asientoInstance.setACancelationtoAReservedSeat(seatId)
+    .then(result => {
+        console.log(result.message);
+    })
+    .catch(err => {
+        console.error("Error:", err);
+    });
 
-Pelicula.getInstance()
-.then(peliculaInstance => {
-    // Verifica si la instancia es válida
-    if (!peliculaInstance) {
-        throw new Error('Pelicula instance is not available');
-    }
-
-    // Llama al método con el estado deseado
-    return peliculaInstance.getAllMoviesAndFunctionsInfo('En cartelera');
-})
-.then(moviesAndFunctions => {
-    console.log('Movies and Functions Info:', moviesAndFunctions);
-})
-.catch(error => {
-    console.error('Error initializing Pelicula:', error);
-});

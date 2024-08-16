@@ -5,7 +5,6 @@
   "type": "commonjs",
   "scripts": {
     "dev": "node --watch --env-file=.env index.js",
-    
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,7 +12,7 @@
   "license": "ISC",
   "description": "Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando MongoDB como base de datos. Las APIs deberán gestionar la selección de películas, la compra de boletos, la asignación de asientos, y la implementación de descuentos para tarjetas VIP, con soporte para diferentes roles de usuario.",
   "dependencies": {
+    "express": "^4.19.2",
     "mongodb": "^6.8.0"
   }
 }
-

@@ -36,7 +36,7 @@ export class Asiento extends connect {
                         estado: "Por Asignar"
                     }
                 },
-                { $project: { _id: 0, fila: 1, codigo: 1, estado: 1, id_funcion: 1 } }
+                { $project: { _id: 1, fila: 1, codigo: 1, estado: 1, id_funcion: 1 } }
             ]).toArray();
         } catch (err) {
             console.error("Error al obtener los asientos:", err);
@@ -80,7 +80,7 @@ export class Asiento extends connect {
 
         return {
             success: res.acknowledged,
-            message: "Asiento actualizado con éxito"
+            message: "Asiento reservado con éxito"
         };
     }
 

@@ -98,11 +98,27 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
            console.error("Error:", err);
        });
 
-      
 
-       
+       //common js
 
-       
+       let obj = new Asiento();
+        const asientoInstance = new Asiento();
+
+        const idFuncion = "64a7e409f7a42a24c8d7e826";
+
+
+        asientoInstance.getAllSeatsByFunction(idFuncion)
+            .then(seats => {
+                console.log("Available seats:", seats);
+            })
+            .catch(err => {
+                console.error("Error:", err);
+            })
+            .finally(() => {
+
+                Asiento.closeConnection();
+            });
+    
 
 3. Asignación de Asientos:
 
@@ -122,6 +138,24 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
          console.error("Error:", err);
      });
      
+     
+     //common js
+
+     const asientoInstance = new Asiento();
+
+    const seatId = "64a7e409f7a42a24c8d7e82b"; 
+    const functionId = "64a7e409f7a42a24c8d7e828"; 
+
+    asientoInstance.setAReservetoASeatForAFunction(seatId, functionId)
+        .then(result => {
+            console.log(result.message); 
+        })
+        .catch(err => {
+            console.error("Error:", err); 
+        })
+        .finally(() => {
+            Asiento.closeConnection();
+        });
 
      ``javascript
 
@@ -139,6 +173,24 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
      }).catch(err => {
          console.error("Error:", err);
      });
+
+     //common js
+
+     const asientoInstance = new Asiento();
+    const seatId = "64a7e409f7a42a24c8d7e82b";
+
+    asientoInstance.getAllTSeatsReservedByFunction(seatId)
+        .then(result => {
+            if (result.success) {
+                console.log("Seat details:", result.data);
+            } else {
+                console.log(result.message);
+            }
+        })
+        .catch(err => {
+            console.error("Error:", err);
+        });
+
      ```
 
      

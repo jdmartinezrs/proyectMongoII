@@ -93,7 +93,7 @@ module.exports = class Pelicula extends Connect {
             }
         ]).toArray()
         .then(res => {
-            // Aquí puedes cerrar la conexión si es necesario
+           
             return res;
         })
         .catch(err => {
@@ -103,7 +103,7 @@ module.exports = class Pelicula extends Connect {
     }
 
     initialize() {
-        // Aquí podrías poner cualquier lógica de inicialización necesaria
+     
     }
     
     static closeConnection() {
