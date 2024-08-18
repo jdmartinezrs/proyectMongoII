@@ -1,6 +1,6 @@
-const Pelicula = require('./server/movies');
-const Cliente = require('./server/clientRoles');
-const Asiento = require('./server/seats')
+const Pelicula = require('./movies');
+const Cliente = require('./clientRoles');
+const Asiento = require('./seats')
 const { ObjectId } = require("mongodb");
 
 const asientoInstance = new Asiento();
