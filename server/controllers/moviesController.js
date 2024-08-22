@@ -1,115 +1,47 @@
+const MoviesModel = require('../model/moviesModel');
 
-const Connect= require("../helpers/connect"); 
-
-module.exports = class Pelicula extends Connect {
-    static instance;
-
-    constructor() {
-        super();
-        this.collection = this.db.collection('pelicula');
+const getAllMoviesInTheaters = async (req, res) => {
+    try {
+        const movies = await MoviesModel.getAllMoviesInTheaters();
+        res.json(movies);
+    } catch (err) {
+        console.error('Error retrieving movies:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
+};
 
-    static async getInstance() {
-        if (!Pelicula.instance) {
-            Pelicula.instance = new Pelicula();
-            await Pelicula.instance.initialize();
+const getAllMoviesComingSoon = async (req, res) => {
+    try {
+        const movies = await MoviesModel.getAllMoviesComingSoon();
+        res.json(movies);
+    } catch (err) {
+        console.error('Error retrieving movies:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+const getAnEspecificMovieInfo = async (req, res) => {
+    const { movieId } = req.params;
+    try {
+        const movie = await MoviesModel.getAnEspecificMovieInfo(movieId);
+        if (movie.length > 0) {
+            res.json(movie[0]);
+        } else {
+            res.status(404).json({ error: 'Movie not found' });
         }
-        return Pelicula.instance;
+    } catch (err) {
+        console.error('Error fetching movie details:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
+};
 
-    async getAllMoviesAndFunctionsInfo(status) {
-        try {
-            const result = await this.collection.aggregate([
-                {
-                    $match: { estado: status }
-                },
-                {
-                    $lookup: {
-                        from: "funcion",
-                        localField: "_id",
-                        foreignField: "id_pelicula",
-                        as: "funciones"
-                    }
-                },
-                {
-                    $unwind: "$funciones"
-                },
-                {
-                    $project: {
-                        _id: 0,
-                        titulo: 1,
-                        genero: 1,
-                        duracion: 1,
-                        estado: 1,
-                        sala: "$funciones.sala",
-                        "funciones.fecha_hora_inicio": 1,
-                        "funciones.fecha_hora_fin": 1
-                    }
-                }
-            ]).toArray();
+module.exports = {
+    getAllMoviesInTheaters,
+    getAllMoviesComingSoon,
+    getAnEspecificMovieInfo
+};
 
-            return result;
-        } catch (err) {
-            console.error('Error retrieving movies and functions:', err);
-            throw err;
-        }
-    }
 
-    async initialize() {
-        // Aquí podrías poner cualquier lógica de inicialización necesaria
-    }
 
-    destructor() {
-        Pelicula.instance = undefined;
-    }
-    
-    getAnEspecificMovieInfo(nombre) {
-        return this.collection.aggregate([
-            {
-                $match: { titulo: nombre } // Usa el parámetro titulo
-            },
-            {
-                $lookup: {
-                    from: "funcion",
-                    localField: "_id",
-                    foreignField: "id_pelicula",
-                    as: "funciones"
-                }
-            },
-            {
-                $unwind: "$funciones"
-            },
-            {
-                $project: {
-                    _id: 0,
-                    titulo: 1,
-                    genero: 1,
-                    duracion: 1,
-                    estado: 1,
-                    sala: "$funciones.sala",
-                    "funciones.fecha_hora_inicio": 1,
-                    "funciones.fecha_hora_fin": 1
-                }
-            }
-        ]).toArray()
-        .then(res => {
-            // Aquí puedes cerrar la conexión si es necesario
-            return res;
-        })
-        .catch(err => {
-            console.error('Error retrieving specific movie info:', err);
-            throw err;
-        });
-    }
 
-    initialize() {
-        // Aquí podrías poner cualquier lógica de inicialización necesaria
-    }
-    
-    static closeConnection() {
-        if (Pelicula.instance) {
-            Pelicula.instance.close();
-        }
-    }
-}
 

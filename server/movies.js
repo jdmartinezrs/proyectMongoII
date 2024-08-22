@@ -56,7 +56,7 @@ module.exports = class Pelicula extends Connect {
     }
 
     async initialize() {
-        // Aquí podrías poner cualquier lógica de inicialización necesaria
+        
     }
 
     destructor() {
@@ -66,7 +66,7 @@ module.exports = class Pelicula extends Connect {
     getAnEspecificMovieInfo(nombre) {
         return this.collection.aggregate([
             {
-                $match: { titulo: nombre } // Usa el parámetro titulo
+                $match: { titulo: nombre } 
             },
             {
                 $lookup: {
@@ -111,5 +111,9 @@ module.exports = class Pelicula extends Connect {
             Pelicula.instance.close();
         }
     }
+
+
+
+    
 }
 

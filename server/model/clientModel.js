@@ -1,4 +1,3 @@
-// cliente.js
 const { ObjectId } = require("mongodb");
 const Connect = require("../../helpers/connect");
 
