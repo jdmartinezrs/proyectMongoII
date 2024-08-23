@@ -1,14 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const MoviesController = require('../controllers/MoviesController');
+const MoviesController = require('../server/controllers/moviesController');
+const userValidationEmpty = require('../server/validator/userValidator')
 
-router.get('/movies/in-theaters', MoviesController.getAllMoviesInTheaters);
-router.get('/movies/coming-soon', MoviesController.getAllMoviesComingSoon);
-router.get('/movies/:movieId', MoviesController.getAnEspecificMovieInfo);
+// Definir las rutas
+router.get('/in-theaters',  /*userValidationEmpty()*/ MoviesController.getAllMoviesInTheaters);
+router.get('/coming-soon', MoviesController.getAllMoviesComingSoon);
+router.get('/:movieId', MoviesController.getAnEspecificMovieInfo);
 
-module.exports = router;
-
-
+module.exports = {
+    router
+};
 
 
 
