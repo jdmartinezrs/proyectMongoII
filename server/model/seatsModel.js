@@ -120,7 +120,7 @@ class SeatsModel extends Connect {
         }
     }
 
-   async removeASeatReservation(showId, seatsToRemove) {
+    async removeASeatReservation(showId, seatsToRemove) {
         return this.collection.updateOne(
             { "_id": new ObjectId(showId) },
             { $pull: { "Booked_seats": { $in: seatsToRemove } } }
@@ -133,7 +133,10 @@ class SeatsModel extends Connect {
     }
 
 }
+
 module.exports = SeatsModel;
+
+
 
 
 

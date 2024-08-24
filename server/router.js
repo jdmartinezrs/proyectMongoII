@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const MoviesController = require('../server/controllers/moviesController');
-const userValidationEmpty = require('../server/validator/userValidator')
+const SeatsController = require('../server/controllers/seatsController');
+//const userValidationEmpty = require('../server/validator/userValidator')
 
 // Definir las rutas
 router.get('/in-theaters',  /*userValidationEmpty()*/ MoviesController.getAllMoviesInTheaters);
@@ -12,6 +13,16 @@ module.exports = {
     router
 };
 
+
+  /*-------------------------------SEATS----------------------------*/
+
+router.get('/:movieId/:dayOfWeek', SeatsController.getMovieShowByDay);
+router.post('/:showId/seatsToReserve', SeatsController.setASeatBooking);
+router.post('/:showId/seats/:removeASeatReservation', SeatsController.removeASeatReservation);
+
+module.exports = {
+    router
+};
 
 
 

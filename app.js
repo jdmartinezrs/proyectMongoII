@@ -1,22 +1,18 @@
 const express = require("express");
 const path = require('path');
 const app = express();
+const MoviesController = require('./server/controllers/moviesController');
+const SeatsController = require('./server/controllers/seatsController');
 
 // Importar los routers desde router.js
 const { router } = require("./server/router");
 
 // Middleware para parsear JSON
 app.use(express.json());
-
-// Middleware para servir archivos estáticos
-// Asegúrate de que la variable de entorno EXPRESS_STATIC esté definida correctamente
-// app.use('/css', express.static(path.join(__dirname, process.env.EXPRESS_STATIC, 'css')));
-// app.use('/js', express.static(path.join(__dirname, process.env.EXPRESS_STATIC, 'js')));
-// app.use('/storage', express.static(path.join(__dirname, process.env.EXPRESS_STATIC, 'storage')));
-
+app.use(express.urlencoded({extended:true}));
 // Rutas de la API
 app.use('/movies', router);
-
+app.use('/SeatsModel', router);
 // Middleware para manejar errores 403
 app.use((req, res, next) => {
     res.status(403).json({ message: "No tiene autorización" });
@@ -29,8 +25,8 @@ app.use((req, res) => {
 
 // Configuración del servidor
 const config = {
-    port: process.env.EXPRESS_PORT || 3000, // Proporcionar un valor predeterminado si no está definido
-    host: process.env.EXPRESS_HOST || 'localhost' // Proporcionar un valor predeterminado si no está definido
+    port: process.env.EXPRESS_PORT || 3000, 
+    host: process.env.EXPRESS_HOST || 'localhost' 
 };
 
 // Iniciar el servidor
