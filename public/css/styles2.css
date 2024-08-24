@@ -1,0 +1,147 @@
+:root {
+    --primary-bg: #000;
+    --secondary-bg: #111;
+    --text-color: #fff;
+    --search-bg: #333;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.app-container {
+    width: 375px; 
+    height: 812px; 
+    margin: 0 auto;
+    background-color: var(--primary-bg);
+    display: grid;
+    grid-template-areas:
+        "header"
+        "search"
+        "now-playing"
+        "coming-soon"
+        "navigation";
+    grid-template-rows: auto auto 1fr 1fr auto;
+    padding: 0;
+    overflow-y: auto; /* Enable vertical scroll */
+}
+
+.header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-greeting {
+    font-size: 0.9rem;
+    line-height: 1.2;
+}
+
+.user-greeting p:first-child {
+    font-weight: bold;
+}
+
+.search-bar {
+    grid-area: search;
+    width: 100%;
+    background-color: var(--search-bg);
+    border-radius: 20px;
+    padding: 8px 10px;
+    margin: 10px 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.search-bar input {
+    width: 90%;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.now-playing,
+.coming-soon {
+    padding: 10px 0;
+    color: #000;
+    text-align: center;
+}
+
+.section-title {
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.movie-list {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.movie-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 140px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.movie-poster {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+
+.movie-title {
+    font-size: 0.8rem;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie-genre {
+    font-size: 0.7rem;
+    color: #888;
+}
+
+.navigation {
+    grid-area: navigation;
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--secondary-bg);
+    padding: 12px 0;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
+
+.nav-item {
+    font-size: 0.8rem;
+    text-align: center;
+}
