@@ -20,28 +20,80 @@
             <input type="text" placeholder="Search movie, cinema, genre...">
         </div>
 
-        <div class="carousel">
-            <section class="now-playing">
+        <section class="now-playing">
+            <div class="titles">
                 <h2 class="section-title">Now Playing</h2>
+                <h2 class="section-title2">See all</h2>
+
+            </div>
+            
+            <div class="slider">
                 <div class="movie-list">
                     <div class="movie-card">
                         <img src="/public/storage/killers.jpg" alt="Movie 1" class="movie-poster">
-                        <p class="movie-title">Puss in Boots: The Last Wish</p>
-                        <p class="movie-genre">Adventure</p>
                     </div>
                     <div class="movie-card">
                         <img src="/public/storage/killers.jpg" alt="Movie 2" class="movie-poster">
-                        <p class="movie-title">Another Movie Title</p>
-                        <p class="movie-genre">Action</p>
+                        
                     </div>
                     <div class="movie-card">
                         <img src="/public/storage/killers.jpg" alt="Movie 3" class="movie-poster">
-                        <p class="movie-title">Yet Another Movie</p>
-                        <p class="movie-genre">Drama</p>
+                        
                     </div>
                 </div>
-            </section>
-        </div>
+                <div class="slider-controls">
+                    <button class="prev">❮</button>
+                    <button class="next">❯</button>
+                </div>
+                <div class="slider-dots">
+                    <span class="dot" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                </div>
+            </div>
 
-        <section class="coming-soon">
-            <h2 class="
+            <p class="movie-title">Yet Another Movie</p>
+            <p class="movie-genre">Drama</p>
+        </section>
+
+        <div class="navigation">
+            <a href="">Home</a>
+            <a href="">Browse</a>
+            <a href="">Tickets</a>
+            <a href="">Profile</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slider = document.querySelector('.movie-list');
+            const dots = document.querySelectorAll('.slider-dots .dot');
+            let currentIndex = 0;
+            
+            function updateSlider(index) {
+                slider.style.transform = `translateX(-${index * 100}%)`;
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[index].classList.add('active');
+            }
+            
+            document.querySelector('.prev').addEventListener('click', () => {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : dots.length - 1;
+                updateSlider(currentIndex);
+            });
+            
+            document.querySelector('.next').addEventListener('click', () => {
+                currentIndex = (currentIndex < dots.length - 1) ? currentIndex + 1 : 0;
+                updateSlider(currentIndex);
+            });
+            
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    currentIndex = parseInt(dot.getAttribute('data-slide'));
+                    updateSlider(currentIndex);
+                });
+            });
+            updateSlider(currentIndex);
+        });
+    </script>
+</body>
+</html>
