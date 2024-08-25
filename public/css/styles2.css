@@ -145,3 +145,10 @@ body {
     font-size: 0.8rem;
     text-align: center;
 }
+
+
+.seat-selection .screen-indicator img {
+    width: 150px;
+    height: auto;
+    max-width: 100%;
+}

@@ -1,20 +1,21 @@
 
-/* *{
+*{
+    color: #CECECE;
     background-color: black;
-} */
+} 
 .asientos{
-    margin-top: 30px;
+    margin-top: 20px;
     padding-bottom: 100px;
-    padding: 0 15px;
+    padding: 0 10px;
 }
 .asientos__normal{
-    margin-bottom: 30px !important;
+    margin-bottom: 20px !important;
 }
 .asientos__normal, 
 .asientos__preferenciales{
     display: flex;
     gap: 10px;
-    margin: 15px 0;
+    margin: 30px 0;
     flex-direction: column;
     align-items: center;
 }
@@ -107,11 +108,15 @@
 }
 
 .calendar {
-    background-color: #000;
+    width: 100%;
+    background-color:yellowgreen;
     color: #fff;
     font-family: Arial, sans-serif;
     border-collapse: separate;
+    overflow: auto;
+     margin: auto;
     border-spacing: 5px;
+    overflow-x: auto;
   }
   
   .calendar th, .calendar td {
@@ -129,7 +134,8 @@
   }
   
   .day-container {
-    width: 100%;
+    background: skyblue;
+    width: 80px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -246,22 +252,26 @@
     width: 100%; /* Set your desired width */
     height: 120px; /* Set your desired height */
   }
-
-  .seat-selection title {
-    margin-top: 300px;
-   color: yellow; /* Set your desired height */
-  }
-
-
-
-
-
-  .screen-line {
-    background-color: red;
-    margin-top: 20px;
-    height: 5px; /* Adjust the thickness as needed */
-    border-radius: 50px / 100%; /* Create a curved effect */
+  .seat-selection .title {
+    
+    font-size: 24px; /* Cambia el tamaño de la fuente */
+    font-weight: bold; /* Cambia el grosor de la fuente */
+    color: #333; /* Cambia el color del texto */
+    text-align: center; /* Centra el texto dentro de su contenedor */
+    margin: 0 auto; /* Asegura que el título esté centrado horizontalmente */
+    padding-top: 50px 0; 
 }
+.screen-indicator .screen-text {
+    
+    font-size: 24px; /* Cambia el tamaño de la fuente */
+    font-weight: bold; /* Cambia el grosor de la fuente */
+    color: #333; /* Cambia el color del texto */
+    text-align: center; /* Centra el texto dentro de su contenedor */
+    margin: 0 auto; /* Asegura que el título esté centrado horizontalmente */
+    margin-top: 100 px ; 
+}
+
+
 
 .price2 {
     color: white; /* White text */
@@ -271,3 +281,41 @@
   .calendar {
     gap: 20px
   }
+
+  .ticket-container{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .ticket-container .buy-ticket {
+    
+    height: 50px;
+    width: 190px;
+    border-radius: 10px; /* Redondea todas las esquinas con un radio de 10px */
+  }
+  
+  .ticket-container {
+    display: flex;
+    align-items: center; /* Aligns items vertically in the center */
+    justify-content: space-between; /* Ensures button stays on the right */
+    width: 90%; /* Ensures the container takes full width */
+}
+
+.organization {
+    display: flex;
+    flex-direction: column; /* Ensures Price and value are stacked */
+}
+
+.price2, .value2 {
+    margin: 0; /* Removes any default margins */
+   
+}
+
+.buy-ticket {
+    margin-right: 30px; /* Adds some space between the text and the button */
+   margin-right: 10px;
+    font-size: 16px; /* Adjusts font size for the button */
+}
+
+

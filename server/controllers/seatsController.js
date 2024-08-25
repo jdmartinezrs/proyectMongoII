@@ -5,8 +5,6 @@ const SeatsModel = require('../model/seatsModel')
 
 //const SeatsModel = require('../path/to/SeatsModel'); 
 
-
-
 const getMovieShowByDay = async (req, res) => {
     const seatsModel = new SeatsModel();
     const { movieId, dayOfWeek } = req.params; 
@@ -22,6 +20,7 @@ const getMovieShowByDay = async (req, res) => {
         res.status(500).json({error: 'Internal Server Error'});
     }
 };
+
 const setASeatBooking = async (req, res) => {
     const seatsModel = new SeatsModel();
     const { showId } = req.params; 
@@ -33,8 +32,7 @@ const setASeatBooking = async (req, res) => {
         console.error('Error in setASeatBooking:', err);
         res.status(500).json({error: 'Internal Server Error'});
     }
-};;
-
+};
 
 const removeASeatReservation = async (req, res) => {
     const seatsModel = new SeatsModel();
