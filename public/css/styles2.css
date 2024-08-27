@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 :root {
     --primary-bg: #000;
     --secondary-bg: #111;
@@ -9,6 +11,8 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
 }
 
 body {
@@ -120,7 +124,7 @@ body {
 .movie-card {
     flex: 0 0 60%; 
     box-sizing: border-box;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -140,19 +144,12 @@ body {
     margin-bottom: 6px;
 }
 
-.movie-title {
-    font-size: 0.75rem;
-    margin-top: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 .movie-genre {
     font-size: 0.65rem;
 }
 
 .navigation {
+    align-items: center;
     grid-area: navigation;
     display: flex;
     justify-content: space-around;
@@ -164,12 +161,33 @@ body {
     width: 100%;
     max-width: 100%;
 }
+.navigation a {
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+}
+
+.navigation a img {
+    width: 15px;
+    height: 15px;
+}
+
+.navigation a img {
+    width: 15px;
+    height: 15px;
+    transition: filter 0.3s ease;
+}
+
+.navigation a img:hover {
+    filter: invert(36%) sepia(92%) saturate(7463%) hue-rotate(0deg) brightness(105%) contrast(112%);
+}
 
 .slider-controls {
     position: absolute;
     top: 50%;
     width: 100%;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     transform: translateY(-50%);
 }
@@ -227,13 +245,13 @@ body {
     justify-content: space-between;
     margin-left: 40px;
     margin-right: 40px;
-    font-size: 13px;
+    font-size: 11px;
 }
 
 .contpro {
     padding: auto;
     height: 1000px;
-    row-gap: 10px;
+    
 }
 
 .contpro__cont {
@@ -247,7 +265,11 @@ body {
     margin-top: 20px;
     justify-content: space-around;
     margin-right: 20px;
+    flex-direction: row;
+    padding: 8px;
+    
 }
+
 
 .contpro__info {
     display: flex;
@@ -258,8 +280,9 @@ body {
 }
 
 .contpro img {
-    width: 45px;
+    width: auto;
     border-radius: 10%;
+    
 }
 
 .navigation a{
@@ -268,3 +291,19 @@ body {
     margin-left: 20px;
     align-content: end;
 } 
+.nombre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    flex-direction: row;
+    font-size: 13px;
+    
+}
+.contN{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+}

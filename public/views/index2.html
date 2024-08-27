@@ -57,24 +57,36 @@
                     <h2>Comming Soon</h2>
                     <h2>See All</h2> 
             </div>
+
             <div class="contpro">
                 <div class="contpro__cont">
-                    <div class="contpro__info"><img src="/public/storage/killers.jpg" alt=""></div>
-                    <div class="nombre">Killer of the flower moon</div>
-                    <div class="año"> 2024</div>
+                    <img class="imgC" src="/public/storage/killers.jpg" alt="">
+                    <div class="contN">
+                    <div class="nombre">
+                        <p>Killer of the flower moon</p> <p style="color: rgb(197, 2, 2);">2024</p></div>
+                        <p>Crime Drama</p>
+                  
+                    </div>
                 </div>
 
-                <div class="contpro__cont">davids</div>
-                <div class="contpro__cont">kamilas</div>             
             </div>
             
         </section>
 
       <footer class="navigation">    
-            <a href="">Home</a>
-            <a href="">Browse</a>
-            <a href="">Tickets</a>
-            <a href="">Profile</a>   
+            <a href=""> 
+                <img src="../storage/house.png" alt="">
+                Home</a>
+          
+            <a href="">
+                <img src="../storage/lupa.png" alt="">
+                Browse</a>
+            <a href="">
+                <img src="../storage/rare.png" alt="">
+                Tickets</a>
+            <a href="">
+                <img src="../storage/character.png" alt="">
+                Profile</a>   
       </footer>   
    
     <script>
@@ -84,7 +96,7 @@
             let currentIndex = 0;
             
             function updateSlider(index) {
-                slider.style.transform = `translateX(-${index * 100}%)`;
+                slider.style.transform = `translateX(-${index * 50}%)`;
                 dots.forEach(dot => dot.classList.remove('active'));
                 dots[index].classList.add('active');
             }

@@ -1,7 +1,13 @@
-
-*{
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+body{
     color: #CECECE;
     background-color: black;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+
 } 
 .asientos{
     margin-top: 20px;
@@ -109,40 +115,44 @@
 
 .calendar {
     width: 100%;
-    background-color:yellowgreen;
-    color: #fff;
+    color: black;
     font-family: Arial, sans-serif;
     border-collapse: separate;
     overflow: auto;
      margin: auto;
     border-spacing: 5px;
     overflow-x: auto;
-  }
-  
-  .calendar th, .calendar td {
-    width: 80px;
-    height: 80px;
+    display: flex;
     padding: 0;
     text-align: center;
-    border: 1px solid #333;
     border-radius: 5px;
     overflow: hidden;
+    margin: 20px 0px ;
   }
   
-  .calendar th.active, .calendar td.active {
-    background-color: #ff0000;
-  }
   
   .day-container {
-    background: skyblue;
-    width: 80px;
-    height: 100%;
+    width: 100%;
+    height: 70px;
+    gap: 10px;
+    display: flex;
+  }
+
+  .day{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+    width: 50px;
+    color: black ;
+    background-color: white ;
   }
-  
+
+  .day:active {
+    background-color: #ff0000;
+    color: white ;
+  }
+
   .weekday {
     font-size: 14px;
     color: #999;
@@ -154,39 +164,40 @@
   }
   
   .carousel {
+    display: flex;
     width: 100%;
-    height: 100%;
+    flex-direction: row;
     flex-wrap: nowrap;
-    overflow: hidden;
-    position: relative;
+    overflow-x: auto;
+    gap: 10px;
   }
   
-  .carousel:hover .time-slot {
-    animation-play-state: paused;
-  }
+
+
+  
   
   .time-slot {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+    min-width: 90px;
+    height: 80px;
     background-color: #fff;
     color: #000;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-  flex-wrap: nowrap;
-    overflow: hidden;
-    animation: carousel 10s infinite;
-    opacity: 0;
+    align-items: center; 
+    border-radius: 10px;
   }
-  
-  .time-slot:nth-child(1) { animation-delay: 0s; }
-  .time-slot:nth-child(2) { animation-delay: 3.33s; }
-  .time-slot:nth-child(3) { animation-delay: 6.66s; }
-  
+ 
+  .time-slot:active {
+    background-color: #ff0000;
+    color: white ;
+  }
+  .price:active {
+    background-color: #ff0000;
+    color: white ;
+  }
+
+
   .time {
     font-size: 18px;
     font-weight: bold;
@@ -197,10 +208,10 @@
     color: #666;
   }
   
-  @keyframes carousel {
+  /* @keyframes carousel {
     0%, 25% { opacity: 1; }
     33%, 100% { opacity: 0; }
-  }
+  } */
 
 
   .ticket-container {
@@ -225,13 +236,13 @@
   }
   
   .seat-selection {
+
     background-color: black;
     color: white;
     text-align: center;
    
   }
   
- 
   .nav {
     display: flex;
     justify-content: space-between;
@@ -249,31 +260,31 @@
   }
   
   .seat-selection {
-    width: 100%; /* Set your desired width */
-    height: 120px; /* Set your desired height */
+    width: 100%; 
+    height: 120px; 
   }
   .seat-selection .title {
     
-    font-size: 24px; /* Cambia el tamaño de la fuente */
-    font-weight: bold; /* Cambia el grosor de la fuente */
-    color: #333; /* Cambia el color del texto */
-    text-align: center; /* Centra el texto dentro de su contenedor */
-    margin: 0 auto; /* Asegura que el título esté centrado horizontalmente */
-    padding-top: 50px 0; 
+    font-size: 24px; 
+    font-weight: bold; 
+    color: white; 
+    text-align: center; 
+    margin: 0 auto; 
+    padding-top: 70px 0; 
 }
 .screen-indicator .screen-text {
     
-    font-size: 24px; /* Cambia el tamaño de la fuente */
-    font-weight: bold; /* Cambia el grosor de la fuente */
-    color: #333; /* Cambia el color del texto */
-    text-align: center; /* Centra el texto dentro de su contenedor */
-    margin: 0 auto; /* Asegura que el título esté centrado horizontalmente */
+    font-size: 24px; 
+    font-weight: bold; 
+    color: white; 
+    text-align: center; 
+    margin: 0 auto; 
     margin-top: 100 px ; 
 }
 
 
 .price2 {
-    color: white; /* White text */
+    color: white; 
     margin-bottom: 10px;
   }
 
@@ -291,23 +302,23 @@
     
     height: 50px;
     width: 190px;
-    border-radius: 10px; /* Redondea todas las esquinas con un radio de 10px */
+    border-radius: 10px; 
   }
   
   .ticket-container {
     display: flex;
-    align-items: center; /* Aligns items vertically in the center */
-    justify-content: space-between; /* Ensures button stays on the right */
-    width: 90%; /* Ensures the container takes full width */
+    align-items: center; 
+    justify-content: space-between; 
+    width: 90%; 
 }
 
 .organization {
     display: flex;
-    flex-direction: column; /* Ensures Price and value are stacked */
+    flex-direction: column; 
 }
 
 .price2, .value2 {
-    margin: 0; /* Removes any default margins */
+    margin: 0; 
    
 }
 
@@ -316,5 +327,4 @@
    margin-right: 10px;
     font-size: 16px; 
 }
-
 
