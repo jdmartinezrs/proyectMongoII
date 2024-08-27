@@ -5,19 +5,15 @@ const SeatsModel = require('../model/seatsModel')
 
 //const SeatsModel = require('../path/to/SeatsModel'); 
 
-const getMovieShowByDay = async (req, res) => {
-    const seatsModel = new SeatsModel();
-    const { movieId, dayOfWeek } = req.params; 
+ getMovieShowByDay = async (req, res) => {
     try {
+        const { movieId, dayOfWeek } = req.params;
+        const seatsModel = new SeatsModel();  // Create an instance
         const shows = await seatsModel.getMovieShowByDay(movieId, dayOfWeek);
-        if (shows.length > 0) {
-            res.json(shows);
-        } else {
-            res.status(404).json({ error: 'No shows found for this movie and day' });
-        }
-    } catch (err) {
-        console.error('Error in getMovieShowByDay:', err);
-        res.status(500).json({error: 'Internal Server Error'});
+        res.json(shows);
+    } catch (error) {
+        console.error('Error in getMovieShowByDay:', error);
+        res.status(500).json({ error: 'Internal server error', details: error.message });
     }
 };
 

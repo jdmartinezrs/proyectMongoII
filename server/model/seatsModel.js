@@ -7,7 +7,7 @@ class SeatsModel extends Connect {
         this.collection = this.db.collection('shows');
     }
 
-    async getMovieShowByDay(movieId, dayOfWeek) {
+     async getMovieShowByDay(movieId, dayOfWeek) {
         try {
             const results = await this.collection.aggregate([
                 {

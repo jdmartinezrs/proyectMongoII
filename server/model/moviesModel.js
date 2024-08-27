@@ -33,10 +33,10 @@ class MoviesModel extends Connect {
         }
     }
 
-    async getAnEspecificMovieInfo(movieId) {
+   async getAnEspecificMovieInfo(movieId) {
         try {
             const result = await this.collection.aggregate([
-                { $match: { _id: new ObjectId(movieId) } },
+                { $match: { _id:(movieId) } },
                 { $unwind: '$cast' },
                 { $group: {
                     _id: '$_id',

@@ -7,16 +7,17 @@ const SeatsController = require('./server/controllers/seatsController');
 // Importar los routers desde router.js
 const { router } = require("./server/router");
 
-// Middleware para parsear JSON
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 // Rutas de la API
-app.use('/movies', router);
-app.use('/SeatsModel', router);
+app.use('/', router);
+// app.use('/movies', router);
+// app.use('/seats', router);
 // Middleware para manejar errores 403
-app.use((req, res, next) => {
-    res.status(403).json({ message: "No tiene autorización" });
-});
+
+
 
 // Middleware para manejar errores 404
 app.use((req, res) => {
@@ -25,7 +26,7 @@ app.use((req, res) => {
 
 // Configuración del servidor
 const config = {
-    port: process.env.EXPRESS_PORT || 3000, 
+    port: process.env.EXPRESS_PORT || 5069, 
     host: process.env.EXPRESS_HOST || 'localhost' 
 };
 
@@ -33,3 +34,5 @@ const config = {
 app.listen(config.port, config.host, () => {
     console.log(`Servidor corriendo en http://${config.host}:${config.port}`);
 });
+
+
