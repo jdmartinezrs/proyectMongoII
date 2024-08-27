@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+body {
+  color: #cecece;
+  background-color: black;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.titletrai {
+  display: flex;
+  justify-content: space-around;
+}
+
+.movie-card {
+  position: relative;
+  top: -50px; /* Mueve la tarjeta 20px hacia arriba */
+  max-width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: green;
+}
+
+.movie-card img {
+  height: 190px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.movie-content {
+  padding: 15px;
+}
+
+.movie-title {
+  font-size: 13px;
+  color: white;
+  margin-bottom: 3px;
+}
+
+.genre {
+  color: white;
+  font-size: 8px;
+  margin-bottom: 15px;
+}
+
+.description {
+  color: white;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.watch-trailer-btn {
+  display: flex;
+  width: 100px;
+  height: 25px;
+  padding: 10px;
+  background-color: #d00;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 8px;
+  align-items: center;
+  justify-content: space-around;
+  margin-left: 10px;
+}
+
+.watch-trailer-btn img {
+  width: 10px;
+  height: 10px;
+}
+
+.watch-trailer-btn:hover {
+  background-color: #b00;
+}
+
+
+
