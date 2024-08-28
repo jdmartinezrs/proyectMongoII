@@ -248,7 +248,7 @@ body {
     font-size: 11px;
 }
 
-.contpro {
+ .contpro {
     padding: auto;
     height: 1000px;
     
@@ -268,8 +268,7 @@ body {
     flex-direction: row;
     padding: 8px;
     
-}
-
+} 
 
 .contpro__info {
     display: flex;
@@ -306,4 +305,6 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 13px;
+    width:80% ;
 }
+

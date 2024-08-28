@@ -52,7 +52,7 @@ class MoviesModel extends Connect {
                     }}
                 }},
                 { $project: {
-                    _id: 0,
+                    _id: 1,
                     name: 1,
                     genre: 1,
                     synopsis: 1,
