@@ -13,6 +13,12 @@ router.get("/asientos", (req, res) => {
   res.sendFile(path.join(__dirname, '../public/views/asientos.html'));
 });
 
+router.get("/movieselected", (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/views/specificmovie.html'));
+});
+
+
+
 router.get('/movies/in-theaters', MoviesController.getAllMoviesInTheaters);
 router.get('/movies/coming-soon', MoviesController.getAllMoviesComingSoon);
 router.get('/movies/:movieId', MoviesController.getAnEspecificMovieInfo);
