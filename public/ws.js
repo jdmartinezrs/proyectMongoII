@@ -254,3 +254,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    const backArrow = document.querySelector('.back-arrow-especific');
+    if (backArrow) {
+        backArrow.addEventListener('click', function() {
+            window.location.href = 'http://localhost:5069/home';
+        });
+    }
+});
