@@ -1,0 +1,103 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+body {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+    margin: 0;
+}
+
+.ticket {
+
+    background-size: cover;
+    width: 300px;
+    height: 550px;
+    padding: 25px;
+    background: blue;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: black;
+}
+
+.ticket img {
+    height: 130px;
+  width: 100%;
+  object-fit: cover;
+    border-radius: 10px;
+}
+
+.title-container{
+    background-color: aquamarine;
+   
+}
+
+.title-container p {
+   align-content: center;
+}
+
+.ticket-title{
+    margin-top: 5px;
+    color: black;
+    font-size: 21px;
+    
+}
+
+
+
+.ticket-header {
+    background-color: yellow;
+    text-align: center;
+    margin-bottom: 60px;   
+}
+
+
+
+.ticket-body {
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    height: 290px;
+
+}
+
+.cinemaname{
+    display: flex;
+    justify-content: space-around;
+    height: 70px;
+}
+.cinemaname img{
+    width: 60px;
+    height: 60px;
+}
+
+.ticket-body h2 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.ticket p {
+    color: black
+}
+
+.ticket-body p {
+    margin: 5px 0;
+}
+
+.ticket-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.ticket-footer img {
+    width: 100%;
+}
+
+.nav-bill{
+    color: #fff;
+}
