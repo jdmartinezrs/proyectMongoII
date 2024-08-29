@@ -218,3 +218,39 @@ function fetchMovieDetails() {
 // Wait for the DOM to be fully loaded before executing the script
 document.addEventListener('DOMContentLoaded', fetchMovieDetails);
 
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('http://localhost:5069/movies/coming-soon')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Fetched coming soon movie data:', data);
+
+            
+            data.forEach((movie, index) => {
+                if (index < 3) { 
+                   
+                    const container = document.getElementById(`movie${index + 1}-container`);
+                    const poster = container.querySelector('.imgC');
+                    const title = container.querySelector(`#movie${index + 1}-title`);
+                    const year = container.querySelector(`#movie${index + 1}-year`);
+                    const genre = container.querySelector(`#movie${index + 1}-genre`);
+
+                    if (poster && title && year && genre) {
+                        poster.src = movie.movie_image || 'https://via.placeholder.com/300x450?text=No+Poster';
+                        poster.alt = movie.name;
+                        title.textContent = movie.name;
+                        year.textContent = movie.year || 'Unknown Year';
+                        genre.textContent = movie.genre || 'Unknown Genre';
+                    } else {
+                        console.error(`Elements for movie ${index + 1} are missing in the DOM.`);
+                    }
+                }
+            });
+
+            console.log('Finished populating coming soon movies');
+        })
+        .catch(error => console.error('Failed to fetch coming soon movie data:', error));
+});
+
+
