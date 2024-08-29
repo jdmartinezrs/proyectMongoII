@@ -163,7 +163,7 @@ body{
     font-weight: bold;
   }
   
-  .carousel {
+  #carousel {
     display: flex;
     width: 100%;
     flex-direction: row;

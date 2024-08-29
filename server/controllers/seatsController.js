@@ -5,7 +5,7 @@ const SeatsModel = require('../model/seatsModel')
 
 //const SeatsModel = require('../path/to/SeatsModel'); 
 
- getMovieShowByDay = async (req, res) => {
+const getMovieShowByDay = async (req, res) => {
     try {
         const { movieId, dayOfWeek } = req.params;
         const seatsModel = new SeatsModel();  // Create an instance

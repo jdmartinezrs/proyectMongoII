@@ -105,6 +105,7 @@
                     </div>
                 </div>  
             </article>
+          </form>
 
             <article class="asientos__menu">
                 <div class="menu-item">
@@ -124,72 +125,42 @@
 
           <div class="calendar">
             <div class="day-container">
-              <div class="day">
+              <div class="day" onclick='loadDays("Monday")'>
                 <span class="weekday">Mon</span>
                 <span class="date">26</span>
               </div>
-              <div class="day">
+              <div class="day" onclick='loadDays("Tuesday")'>
                 <span class="weekday">Tue</span>
                 <span class="date">27</span>
               </div>
-              <div class="day">
+              <div class="day" onclick='loadDays("Wednesday")'>
                 <span class="weekday">Wed</span>
                 <span class="date">28</span>
               </div>
 
-              <div class="day">
+              <div class="day" onclick='loadDays("Thursday")'>
                 <span class="weekday">Thu</span>
                 <span class="date">29</span>
               </div>
 
-              <div class="day">
+              <div class="day" onclick='loadDays("Friday")'>
                 <span class="weekday">Fri</span>
                 <span class="date">30</span>
               </div>
 
-              <div class="day">
+              <div class="day" onclick='loadDays("Saturday")'>
                 <span class="weekday">Sat</span>
                 <span class="date">31</span>
               </div>
 
-              <div class="day">
+              <div class="day" onclick='loadDays("Sunday")'>
                 <span class="weekday">Sun</span>
                 <span class="date">01</span>
               </div>
             </div>
           </div>
           
-          <div class="carousel">
-            <div class="time-slot">
-              <span class="time">11:30</span>
-              <span class="price">$6.50 •3D</span>
-            </div>
-
-            <div class="time-slot">
-              <span class="time">20:30</span>
-              <span class="price">$6.50 •3D</span>
-            </div>
-
-            <div class="time-slot">
-              <span class="time">20:30</span>
-              <span class="price">$6.50 •3D</span>
-            </div>
-
-            <div class="time-slot">
-              <span class="time">20:30</span>
-              <span class="price">$6.50 •3D</span>
-            </div>
-
-            <div class="time-slot">
-              <span class="time">20:30</span>
-              <span class="price">$6.50 •3D</span>
-            </div>
-
-            <div class="time-slot">
-              <span class="time">20:30</span>
-              <span class="price">$6.50 •3D</span>
-            </div>
-         
+          <div id="carousel">
           </div>
         
           <div class="ticket-container">
@@ -199,7 +170,144 @@
             </div>
             <button class="buy-ticket">Buy ticket</button>
         </div>
- 
+        <script>
+          async function loadDays (dayToday) {
+            const response = await fetch(`http://localhost:5069/seats/64dedf4e9b5f1f7b0f8a2c3e/${dayToday}`);
+            const days = await response.json();
+            const hoursContainer = document.getElementById('carousel')
+            hoursContainer.innerHTML = ""
+            days.forEach(day => {
+              hoursContainer.innerHTML += `
+              <div class="time-slot" onclick="loadSeats(event, '${dayToday}')">
+                <span class="time">${day.time}</span>
+                <span class="price">$${day.price} •${day.type}</span>
+              </div>
+              `
+            });
+          }
+          async function loadSeats (event, day) {
+            const clickedDiv = event.currentTarget;
+            const time = clickedDiv.querySelector("span.time");
+
+            const response = await fetch(`http://localhost:5069/seats/64dedf4e9b5f1f7b0f8a2c3e/${day}`);
+            const days = await response.json();
+            days.forEach(day => {
+              if (day.time === time.textContent) {
+                const form = document.getElementById("myform")
+
+
+
+                let asientosNormal = '<article class="asientos__normal">'
+                let fila1 = ""
+                for (let i = 0; i < 5; i++) {
+                  const seat = day.seats[i];
+                  if (seat.status === "reserved") {
+                    fila1 += `<input type="checkbox" disabled class="reserved" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  } else {
+                    fila1 += `<input type="checkbox" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  }
+                }
+                asientosNormal += `<div fila="1">
+                  <small>A</small>
+                    <div class="asientos__lista">
+                    ${fila1}
+                    </div>
+                </div>`
+
+                let fila2 = ""
+                for (let i = 5; i < 12; i++) {
+                  const seat = day.seats[i];
+                  if (seat.status === "reserved") {
+                    fila2 += `<input type="checkbox" disabled class="reserved" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  } else {
+                    fila2 += `<input type="checkbox" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  }
+                }
+                asientosNormal += `<div fila="2">
+                  <small>B</small>
+                    <div class="asientos__lista">
+                    ${fila2}
+                    </div>
+                </div>`
+                asientosNormal += '</article>'
+
+
+
+
+
+                let asientosPreferenciales = '<article class="asientos__preferenciales">'
+                let fila3 = ""
+                for (let i = 12; i < 21; i++) {
+                  const seat = day.seats[i];
+                  if (seat.status === "reserved") {
+                    fila3 += `<input type="checkbox" disabled class="reserved" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  } else {
+                    fila3 += `<input type="checkbox" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  }
+                }
+                asientosPreferenciales += `<div fila="3">
+                  <small>C</small>
+                    <div class="asientos__lista">
+                    ${fila3}
+                    </div>
+                </div>`
+
+                let fila4 = ""
+                for (let i = 21; i < 30; i++) {
+                  const seat = day.seats[i];
+                  if (seat.status === "reserved") {
+                    fila4 += `<input type="checkbox" disabled class="reserved" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  } else {
+                    fila4 += `<input type="checkbox" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  }
+                }
+                asientosPreferenciales += `<div fila="4">
+                  <small>D</small>
+                    <div class="asientos__lista">
+                    ${fila4}
+                    </div>
+                </div>`
+
+                let fila5 = ""
+                for (let i = 30; i < 39; i++) {
+                  const seat = day.seats[i];
+                  if (seat.status === "reserved") {
+                    fila5 += `<input type="checkbox" disabled class="reserved" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  } else {
+                    fila5 += `<input type="checkbox" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  }
+                }
+                asientosPreferenciales += `<div fila="5">
+                  <small>E</small>
+                    <div class="asientos__lista">
+                    ${fila5}
+                    </div>
+                </div>`
+
+                let fila6 = ""
+                for (let i = 39; i < 48; i++) {
+                  const seat = day.seats[i];
+                  if (seat.status === "reserved") {
+                    fila6 += `<input type="checkbox" disabled class="reserved" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  } else {
+                    fila6 += `<input type="checkbox" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  }
+                }
+                asientosPreferenciales += `<div fila="6">
+                  <small>F</small>
+                    <div class="asientos__lista">
+                    ${fila6}
+                    </div>
+                </div>`
+                asientosPreferenciales += '</article>'
+                form.innerHTML=`
+                  ${asientosNormal}
+                  ${asientosPreferenciales}                
+                `
+              }
+            })
+          }  
+        </script>
 </body>
 </html>
 
