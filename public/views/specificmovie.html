@@ -6,6 +6,14 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/specific.css" />
     <script src="../ws.js"></script>
+    <script>
+      // ... (previous JavaScript code remains unchanged)
+  
+      // Add this new function for the "Book Now" button
+      function redirectToBooking() {
+          window.location.href = 'http://localhost:5069/asientos';
+      }
+      </script>
   </head>
   <body>
     <div class="nav">
@@ -82,9 +90,7 @@
   <img src="/storage/campus.jpg" class="cinema-logo">
 </div>
 
-
-<button class="book-now-btn">Book Now</button>
-
-    
+ <!-- HERE -->
+<button class="book-now-btn" onclick="redirectToBooking()">Book Now</button>
   </body>
 </html>
