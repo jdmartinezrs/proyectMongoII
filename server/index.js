@@ -13,9 +13,7 @@ module.exports = class Connect {
     
         constructor()
         {
-            if(typeof Connect.instance === "object"){
-                return Connect.instance;
-            }
+            
             
             this.user = process.env.MONGO_USER;
             this.port = process.env.MONGO_PORT;
@@ -25,8 +23,7 @@ module.exports = class Connect {
             this.#dbName = process.env.MONGO_DB;
             this.#open();
             this.db = this.conexion.db(this.getDbName)
-            Connect.instance = this;
-            return this;
+           
         }
         set setPass(pass){
             this.#pass = pass
