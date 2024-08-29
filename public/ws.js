@@ -76,6 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Failed to fetch movie data:', error));
 });
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
     fetch('http://localhost:5069/movies/coming-soon')
         .then(response => response.json())
@@ -108,6 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Failed to fetch coming soon movie data:', error));
 });
+
+
 
 
 

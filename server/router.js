@@ -5,7 +5,7 @@ const MoviesController = require('../server/controllers/moviesController');
 const SeatsController = require('../server/controllers/seatsController');
 
 // Definir las rutas
-router.get("/index2", (req, res) => {
+router.get("/home", (req, res) => {
   res.sendFile(path.join(__dirname, '../public/views/index2.html'));
 });
 
