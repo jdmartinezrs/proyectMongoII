@@ -171,8 +171,10 @@
             <button class="buy-ticket">Buy ticket</button>
         </div>
         <script>
+          const urlParams = new URLSearchParams(window.location.search);
+          const movieId = urlParams.get('id')
           async function loadDays (dayToday) {
-            const response = await fetch(`http://localhost:5069/seats/64dedf4e9b5f1f7b0f8a2c3e/${dayToday}`);
+            const response = await fetch(`http://localhost:5069/seats/${movieId}/${dayToday}`);
             const days = await response.json();
             const hoursContainer = document.getElementById('carousel')
             hoursContainer.innerHTML = ""
@@ -189,7 +191,7 @@
             const clickedDiv = event.currentTarget;
             const time = clickedDiv.querySelector("span.time");
 
-            const response = await fetch(`http://localhost:5069/seats/64dedf4e9b5f1f7b0f8a2c3e/${day}`);
+            const response = await fetch(`http://localhost:5069/seats/${movieId}/${day}`);
             const days = await response.json();
             days.forEach(day => {
               if (day.time === time.textContent) {

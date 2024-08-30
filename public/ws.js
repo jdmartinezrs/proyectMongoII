@@ -267,4 +267,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-
+function redirectToBooking() {
+    // window.location.href = 'http://localhost:5069/asientos';
+    window.location.href = `http://localhost:5069/asientos?id=${movieId}`;
+}
