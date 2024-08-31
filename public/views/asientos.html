@@ -198,6 +198,7 @@
                 const form = document.getElementById("myform")
                 localStorage.setItem("showId",day._id)
                 localStorage.setItem("precio",event.target.querySelector("span.price").textContent.split(" ")[0])
+                localStorage.setItem("time", day.time)
 
 
                 let asientosNormal = '<article class="asientos__normal">'
@@ -336,6 +337,7 @@
             const  totalPriceP= document.querySelector("p.value2")
             totalPriceP.textContent = `Total: $${totalPrice}`
             localStorage.setItem("seats",selectedSeatsId)
+            localStorage.setItem("totalprice",totalPrice)
           }
           const PostReservation = async(showId, seatsToReserve)=>{
             const response = await fetch(`http://localhost:5069/seats/:showId/seatsToReserve`, {
@@ -346,6 +348,7 @@
                   body: JSON.stringify({ "showId": showId,
               "seatsToReserve": seatsToReserve }),
                 })
+
             }
             
 
