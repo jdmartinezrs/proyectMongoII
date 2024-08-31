@@ -22,7 +22,7 @@
 
 
     <section class="asientos">
-        <form id="myform">
+        <form id="myform" onchange="getSelectedSeats()">
             <article class="asientos__normal">
                 <div fila="1">
                     <small>A</small>
@@ -166,9 +166,9 @@
           <div class="ticket-container">
             <div class="organization">
                 <p class="price2">Price</p>
-                <p class="value2" style="font-size: 21px">$24.99</p>
+                <p class="value2" style="font-size: 21px">$0</p>
             </div>
-            <button class="buy-ticket">Buy ticket</button>
+            <button class="buy-ticket" onclick="PostReservation(localStorage.getItem('showId'),localStorage.getItem('seats'))">Buy ticket</button>
         </div>
         <script>
           const urlParams = new URLSearchParams(window.location.search);
@@ -196,7 +196,8 @@
             days.forEach(day => {
               if (day.time === time.textContent) {
                 const form = document.getElementById("myform")
-
+                localStorage.setItem("showId",day._id)
+                localStorage.setItem("precio",event.target.querySelector("span.price").textContent.split(" ")[0])
 
 
                 let asientosNormal = '<article class="asientos__normal">'
@@ -318,6 +319,36 @@
                 })
                 .catch(error => console.error('Error fetching movie details:', error));
         }
+        function getSelectedSeats() {
+            let totalPrice = localStorage.getItem("precio")
+            let selectedSeats = document.querySelectorAll('input[type=checkbox]:checked');
+            // remover el punto del precio total
+            totalPrice = Number(totalPrice.replace(/\D/g, ""))
+            totalPrice = totalPrice * selectedSeats.length
+            let selectedSeatsId=[]
+            for (let i = 0; i < selectedSeats.length; i++) {
+              const seat = selectedSeats[i];
+              selectedSeatsId.push(seat.id)
+            }
+            selectedSeatsId = selectedSeatsId.toString()
+            totalPrice = parseFloat(totalPrice)/10
+            totalPrice.toFixed(1)
+            const  totalPriceP= document.querySelector("p.value2")
+            totalPriceP.textContent = `Total: $${totalPrice}`
+            localStorage.setItem("seats",selectedSeatsId)
+          }
+          const PostReservation = async(showId, seatsToReserve)=>{
+            const response = await fetch(`http://localhost:5069/seats/:showId/seatsToReserve`, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ "showId": showId,
+              "seatsToReserve": seatsToReserve }),
+                })
+            }
+            
+
         </script>
 </body>
 </html>

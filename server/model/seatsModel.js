@@ -30,6 +30,7 @@ class SeatsModel extends Connect {
                 {
                     $project: {
                         date: { $ifNull: [{ $substr: ["$date", 8, 2] }, null] },
+                        _id: 1,
                         day: 1,
                         price: 1,
                         type: 1,
@@ -51,6 +52,7 @@ class SeatsModel extends Connect {
                 },
                 {
                     $project: {
+                        _id:1,
                         date: 1,
                         day: 1,
                         price: 1,
@@ -87,6 +89,7 @@ class SeatsModel extends Connect {
 
             if (results.length > 0) {
                 const movieShows = results.map(show => ({
+                    _id: show._id,
                     date: show.date,
                     day: show.day,
                     price: show.price,
