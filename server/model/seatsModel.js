@@ -111,7 +111,7 @@ class SeatsModel extends Connect {
         try {
             const result = await this.collection.updateOne(
                 { "_id": new ObjectId(showId) },
-                { $push: { "Booked_seats": { $each: seatsToReserve } } }
+                { $push: { "Booked_seats": { $each: [seatsToReserve] } } }
             );
             return result;
         } catch (err) {

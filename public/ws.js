@@ -271,3 +271,16 @@ function redirectToBooking() {
     // window.location.href = 'http://localhost:5069/asientos';
     window.location.href = `http://localhost:5069/asientos?id=${movieId}`;
 }
+
+
+
+const PostReservation = async(showId, seatsToReserve)=>{
+const response = await fetch(`http://localhost:5069/seats/:showId/seatsToReserve`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ "showId": showId,
+  "seatsToReserve": seatsToReserve }),
+    })
+}

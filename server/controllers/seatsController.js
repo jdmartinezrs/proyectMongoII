@@ -19,7 +19,7 @@ const getMovieShowByDay = async (req, res) => {
 
 const setASeatBooking = async (req, res) => {
     const seatsModel = new SeatsModel();
-    const { showId } = req.params; 
+    const { showId } = req.body; 
     const { seatsToReserve } = req.body; // Asumiendo que los asientos a reservar se envían en el cuerpo de la solicitud
     try {
         const result = await seatsModel.SetASeatBooking(showId, seatsToReserve);
