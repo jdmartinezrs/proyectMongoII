@@ -17,12 +17,12 @@ body {
 
     background-size: cover;
     width: 300px;
-    height: 550px;
+    height: 540px;
     padding: 25px;
-    background: blue;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: black;
+    background: white;
 }
 
 .ticket img {
@@ -32,11 +32,23 @@ body {
     border-radius: 10px;
 }
 
-.title-container{
-    background-color: aquamarine;
-   
-}
+.nav{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    height: 40px;
+    margin-left: 20px;
+    justify-content:space-around;
+    margin-top: 10px;
+    color: aliceblue;
+    }
 
+    .menu{
+        color: #fff;
+        margin-right: 110px;
+        margin-bottom: 20px;
+       
+    }
 .title-container p {
    align-content: center;
 }
@@ -44,11 +56,8 @@ body {
 .ticket-title{
     margin-top: 5px;
     color: black;
-    font-size: 21px;
-    
+    font-size: 21px; 
 }
-
-
 
 .ticket-header {
     background-color: yellow;
@@ -56,14 +65,11 @@ body {
     margin-bottom: 60px;   
 }
 
-
-
 .ticket-body {
     background: white;
     padding: 10px;
     border-radius: 5px;
     height: 290px;
-
 }
 
 .cinemaname{
@@ -100,4 +106,27 @@ body {
 
 .nav-bill{
     color: #fff;
+}
+
+
+.date-show{  
+    display:flex;
+    justify-content: space-around;
+}
+
+.cinema-seat{
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    margin-right: 20px;  
+}
+
+.room-cost{
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.ticket p{
+    font-weight: 600;
 }

@@ -4,35 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Ticket</title>
-    <link rel="stylesheet" href="/public/css/factura.css">
+    <link rel="stylesheet" href="/css/factura.css">
 </head>
 <body>
-    <div class="nav-bill">
-        <span class="back-arrow-especific">&lt;</span>
-        <span class="title" style="margin-top:10px; font-size: 21px; "></span>
-        
-      </div>
-      <span class="menu">Cinema Selection</span>
+    <div class="nav">
+      <span class="back-arrow-especific">&lt;</span>
+      <span class="title" style="margin-top:10px; font-size: 21px; "></span>
+      <p class="menu">Cinema Selection</p>
+    </div>
+
+    
 
     <div class="ticket">
         <img src="/public/storage/avatar.jpg" alt="">
         <div class="title-container">
             <h1 class="ticket-title">CINEMA HARTONO MALL 12</h1>
-            <p>Show this ticket at the entrance</p>
+            <p><small>Show this ticket at the entrance</small></p>
         </div>
       
-        
-
         <div class="ticket-body">
             <div class="cinemaname"> 
                 <div class="cinemaname-info"><p>cinema</p>
                     <h2>CineCampus</h2></div>
                 <div >
-                    <img class="imagecampus" src="/public/storage/campus.jpg" alt="">
+                    <img class="imagecampus" src="/storage/campus.jpg" alt="">
                 </div>
                </div>
-               <p>Cinema A, Seat C26,29</p>
-               <p>Order ID: 12345678</p>
+
+               <div class="date-show">
+               <div class="date-show-day">
+                <p>Date</p>
+                <p>10</p>
+               </div>
+               <div class="date-show-time">
+                 <p>Time</p>
+                    <p>13:00</p>
+               </div>
+            
+                </div>
+
+                <div class="cinema-seat">
+                    <div class="room">
+                        <p>Cinema Hall</p>
+                        <p>cinema a</p>
+                    </div>
+                    <div class="room-seat">
+                        <p class="room-seat-id">Seat</p>
+                        <p>C5</p>
+                    </div>
+                </div>
+
+                <div class="room-cost">
+                    <div class="room-cost-price">
+                     <p class>cost</p>
+                     <p class="price">26.58</p>
+                    </div>
+                    <div class="room-ticket-id">
+                      <p>Order ID</p>
+                         <p>122554889</p>
+                    </div>
+               </div>
         </div>
         
         <div class="ticket-footer">
