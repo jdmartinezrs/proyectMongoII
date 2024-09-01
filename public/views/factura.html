@@ -34,11 +34,11 @@
                <div class="date-show">
                <div class="date-show-day">
                 <p>Date</p>
-                <p>10</p>
+                <p class="dia">10</p>
                </div>
                <div class="date-show-time">
                  <p>Time</p>
-                    <p>13:00</p>
+                    <p class="tiempo">13:00</p>
                </div>
             
                 </div>
@@ -46,11 +46,11 @@
                 <div class="cinema-seat">
                     <div class="room">
                         <p>Cinema Hall</p>
-                        <p>cinema a</p>
+                        <p class="sala">cinema a</p>
                     </div>
                     <div class="room-seat">
                         <p class="room-seat-id">Seat</p>
-                        <p>C5</p>
+                        <p class="asiento">C5</p>
                     </div>
                 </div>
 
@@ -70,5 +70,21 @@
             <img src="barcode-placeholder.png" alt="Barcode">
         </div>
     </div>
+    <script>
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        };
+
+        // Populate ticket information
+        document.querySelector('.dia').textContent = getUrlParameter('date');
+        document.querySelector('.tiempo').textContent = getUrlParameter('time');
+        document.querySelector('.sala').textContent = getUrlParameter('room');
+        document.querySelector('.asiento').textContent = getUrlParameter('seats');
+        document.querySelector('.price').textContent = '$' + getUrlParameter('price');
+    </script>
 </body>
 </html>

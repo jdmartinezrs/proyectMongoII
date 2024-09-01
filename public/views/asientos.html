@@ -339,18 +339,36 @@
             localStorage.setItem("seats",selectedSeatsId)
             localStorage.setItem("totalprice",totalPrice)
           }
-          const PostReservation = async(showId, seatsToReserve)=>{
-            const response = await fetch(`http://localhost:5069/seats/:showId/seatsToReserve`, {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({ "showId": showId,
-              "seatsToReserve": seatsToReserve }),
-                })
-
+          const PostReservation = async(showId, seatsToReserve) => {
+            try {
+                const response = await fetch(`http://localhost:5069/seats/:showId/seatsToReserve`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        "showId": showId,
+                        "seatsToReserve": seatsToReserve 
+                    }),
+                });
+        
+                if (response.ok) {
+                    // Get the data we need for the factura page
+                    const date = new Date().toISOString().split('T')[0]; // Current date
+                    const time = localStorage.getItem('time');
+                    const roomId = 'Cinema A'; // You might need to get this from somewhere
+                    const seats = localStorage.getItem('seats');
+                    const totalPrice = localStorage.getItem('totalprice');
+        
+                    // Redirect to the factura page with the data as URL parameters
+                    window.location.href = `http://localhost:5069/factura?date=${date}&time=${time}&room=${roomId}&seats=${seats}&price=${totalPrice}`;
+                } else {
+                    console.error('Reservation failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
             }
-            
+        };
 
         </script>
 </body>
