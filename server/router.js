@@ -21,6 +21,10 @@ router.get("/factura", (req, res) => {
   res.sendFile(path.join(__dirname, '../public/views/factura.html'));
 });
 
+router.get("/coming", (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/views/comingsoon.html'));
+});
+
 
 
 router.get('/movies/in-theaters', MoviesController.getAllMoviesInTheaters);
