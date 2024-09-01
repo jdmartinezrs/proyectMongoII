@@ -360,8 +360,12 @@
                     const seats = localStorage.getItem('seats');
                     const totalPrice = localStorage.getItem('totalprice');
         
-                    // Redirect to the factura page with the data as URL parameters
-                    window.location.href = `http://localhost:5069/factura?date=${date}&time=${time}&room=${roomId}&seats=${seats}&price=${totalPrice}`;
+                    // Fetch movie details
+                    const movieResponse = await fetch(`http://localhost:5069/movies/${movieId}`);
+                    const movieData = await movieResponse.json();
+        
+                    // Redirect to the factura page with all the data as URL parameters
+                    window.location.href = `http://localhost:5069/factura?date=${date}&time=${time}&room=${roomId}&seats=${seats}&price=${totalPrice}&movieImage=${encodeURIComponent(movieData.movie_image)}&movieName=${encodeURIComponent(movieData.name)}`;
                 } else {
                     console.error('Reservation failed');
                 }
