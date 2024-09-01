@@ -69,22 +69,25 @@
     </div>
 
     <script>
-        // Function to get URL parameters
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
             var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
             var results = regex.exec(location.search);
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        };
-
-        // Populate ticket information
-        document.querySelector('.movie-poster').src = getUrlParameter('movieImage');
-        document.querySelector('.ticket-title').textContent = getUrlParameter('movieName');
-        document.querySelector('.dia').textContent = getUrlParameter('date');
-        document.querySelector('.tiempo').textContent = getUrlParameter('time');
-        document.querySelector('.sala').textContent = getUrlParameter('room');
-        document.querySelector('.asiento').textContent = getUrlParameter('seats');
-        document.querySelector('.price').textContent = '$' + getUrlParameter('price');
+          }
+          
+          function formatPrice(price) {
+            return '$' + parseFloat(price).toFixed(2);
+          }
+          
+          // Populate ticket information
+          document.querySelector('.movie-poster').src = getUrlParameter('movieImage');
+          document.querySelector('.ticket-title').textContent = getUrlParameter('movieName');
+          document.querySelector('.dia').textContent = getUrlParameter('day');
+          document.querySelector('.tiempo').textContent = getUrlParameter('time');
+          document.querySelector('.sala').textContent = getUrlParameter('room');
+          document.querySelector('.asiento').textContent = getUrlParameter('seats');
+          document.querySelector('.price').textContent = formatPrice(getUrlParameter('price'));
     </script>
 </body>
 </html>

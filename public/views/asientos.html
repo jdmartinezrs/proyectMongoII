@@ -173,18 +173,22 @@
         <script>
           const urlParams = new URLSearchParams(window.location.search);
           const movieId = urlParams.get('id')
-          async function loadDays (dayToday) {
+          async function loadDays(dayToday) {
             const response = await fetch(`http://localhost:5069/seats/${movieId}/${dayToday}`);
             const days = await response.json();
-            const hoursContainer = document.getElementById('carousel')
-            hoursContainer.innerHTML = ""
+            const hoursContainer = document.getElementById('carousel');
+            hoursContainer.innerHTML = "";
+          
+            // Store the selected day in localStorage
+            localStorage.setItem('selectedDay', dayToday);
+          
             days.forEach(day => {
               hoursContainer.innerHTML += `
               <div class="time-slot" onclick="loadSeats(event, '${dayToday}')">
                 <span class="time">${day.time}</span>
                 <span class="price">$${day.price} •${day.type}</span>
               </div>
-              `
+              `;
             });
           }
           async function loadSeats (event, day) {
@@ -321,59 +325,62 @@
                 .catch(error => console.error('Error fetching movie details:', error));
         }
         function getSelectedSeats() {
-            let totalPrice = localStorage.getItem("precio")
-            let selectedSeats = document.querySelectorAll('input[type=checkbox]:checked');
-            // remover el punto del precio total
-            totalPrice = Number(totalPrice.replace(/\D/g, ""))
-            totalPrice = totalPrice * selectedSeats.length
-            let selectedSeatsId=[]
-            for (let i = 0; i < selectedSeats.length; i++) {
-              const seat = selectedSeats[i];
-              selectedSeatsId.push(seat.id)
-            }
-            selectedSeatsId = selectedSeatsId.toString()
-            totalPrice = parseFloat(totalPrice)/10
-            totalPrice.toFixed(1)
-            const  totalPriceP= document.querySelector("p.value2")
-            totalPriceP.textContent = `Total: $${totalPrice}`
-            localStorage.setItem("seats",selectedSeatsId)
-            localStorage.setItem("totalprice",totalPrice)
+          let totalPrice = localStorage.getItem("precio")
+          let selectedSeats = document.querySelectorAll('input[type=checkbox]:checked');
+          
+          // Convert price to cents
+          totalPrice = Math.round(parseFloat(totalPrice.replace('$', '')) * 100);
+          totalPrice = totalPrice * selectedSeats.length;
+          
+          let selectedSeatsId = [];
+          for (let i = 0; i < selectedSeats.length; i++) {
+            const seat = selectedSeats[i];
+            selectedSeatsId.push(seat.id);
           }
-          const PostReservation = async(showId, seatsToReserve) => {
-            try {
-                const response = await fetch(`http://localhost:5069/seats/:showId/seatsToReserve`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ 
-                        "showId": showId,
-                        "seatsToReserve": seatsToReserve 
-                    }),
-                });
+          selectedSeatsId = selectedSeatsId.toString();
+          
+          // Convert back to dollars and cents
+          totalPrice = (totalPrice / 100).toFixed(2);
+          
+          const totalPriceP = document.querySelector("p.value2");
+          totalPriceP.textContent = `Total: $${totalPrice}`;
+          localStorage.setItem("seats", selectedSeatsId);
+          localStorage.setItem("totalprice", totalPrice);
+        }
+        const PostReservation = async(showId, seatsToReserve) => {
+          try {
+            const response = await fetch(`http://localhost:5069/seats/${showId}/seatsToReserve`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ 
+                "showId": showId,
+                "seatsToReserve": seatsToReserve 
+              }),
+            });
         
-                if (response.ok) {
-                    // Get the data we need for the factura page
-                    const date = new Date().toISOString().split('T')[0]; // Current date
-                    const time = localStorage.getItem('time');
-                    const roomId = 'Cinema A'; // You might need to get this from somewhere
-                    const seats = localStorage.getItem('seats');
-                    const totalPrice = localStorage.getItem('totalprice');
+            if (response.ok) {
+              const selectedDay = localStorage.getItem('selectedDay');
+              const time = localStorage.getItem('time');
+              const roomId = localStorage.getItem('roomId') || 'Cinema A';
+              const seats = localStorage.getItem('seats');
+              const totalPrice = localStorage.getItem('totalprice');
         
-                    // Fetch movie details
-                    const movieResponse = await fetch(`http://localhost:5069/movies/${movieId}`);
-                    const movieData = await movieResponse.json();
+              // Fetch movie details
+              const movieResponse = await fetch(`http://localhost:5069/movies/${movieId}`);
+              const movieData = await movieResponse.json();
         
-                    // Redirect to the factura page with all the data as URL parameters
-                    window.location.href = `http://localhost:5069/factura?date=${date}&time=${time}&room=${roomId}&seats=${seats}&price=${totalPrice}&movieImage=${encodeURIComponent(movieData.movie_image)}&movieName=${encodeURIComponent(movieData.name)}`;
-                } else {
-                    console.error('Reservation failed');
-                }
-            } catch (error) {
-                console.error('Error:', error);
+              // Redirect to the factura page with all the data as URL parameters
+              window.location.href = `http://localhost:5069/factura?day=${selectedDay}&time=${time}&room=${roomId}&seats=${seats}&price=${encodeURIComponent(totalPrice)}&movieImage=${encodeURIComponent(movieData.movie_image)}&movieName=${encodeURIComponent(movieData.name)}`;
+            } else {
+              console.error('Reservation failed');
             }
+          } catch (error) {
+            console.error('Error:', error);
+          }
         };
-
+        
         </script>
 </body>
 </html>
