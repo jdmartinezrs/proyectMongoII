@@ -27,6 +27,26 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
       const status = "En cartelera"; 
       const moviesAndFunctions = await obj.getAllMoviesAndFunctionsInfo(status);
       console.table(moviesAndFunctions);
+
+
+       //common.js 
+       
+        Pelicula.getInstance()
+        .then(peliculaInstance => {
+            // Verifica si la instancia es válida
+            if (!peliculaInstance) {
+                throw new Error('Pelicula instance is not available');
+            }
+
+            // Llama al método con el estado deseado
+            return peliculaInstance.getAllMoviesAndFunctionsInfo('En cartelera');
+        })
+        .then(moviesAndFunctions => {
+            console.log('Movies and Functions Info:', moviesAndFunctions);
+        })
+        .catch(error => {
+            console.error('Error initializing Pelicula:', error);
+        });
      ```
 
      
@@ -40,6 +60,22 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
    const titulo = "El Gran Escape"; 
    const specificMovie = await obj.getAnEspecificMovieInfo(titulo);
    console.table(specificMovie);
+
+   //common.js
+   Pelicula.getInstance()
+    .then(peliculaInstance => {
+        const titulo = "El Gran Escape"; 
+        return peliculaInstance.getAnEspecificMovieInfo(titulo);
+    })
+    .then(specificMovie => {
+        console.table(specificMovie);
+        Pelicula.closeConnection(); // Asegúrate de cerrar la conexión
+    })
+    .catch(error => {
+        console.error('Error initializing Pelicula:', error);
+        Pelicula.closeConnection(); // Asegúrate de cerrar la conexión en caso de error
+    });
+
    ```
 
    
@@ -61,9 +97,28 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
        }).catch(err => {
            console.error("Error:", err);
        });
-       
 
-       
+
+       //common js
+
+       let obj = new Asiento();
+        const asientoInstance = new Asiento();
+
+        const idFuncion = "64a7e409f7a42a24c8d7e826";
+
+
+        asientoInstance.getAllSeatsByFunction(idFuncion)
+            .then(seats => {
+                console.log("Available seats:", seats);
+            })
+            .catch(err => {
+                console.error("Error:", err);
+            })
+            .finally(() => {
+
+                Asiento.closeConnection();
+            });
+    
 
 3. Asignación de Asientos:
 
@@ -83,6 +138,24 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
          console.error("Error:", err);
      });
      
+     
+     //common js
+
+     const asientoInstance = new Asiento();
+
+    const seatId = "64a7e409f7a42a24c8d7e82b"; 
+    const functionId = "64a7e409f7a42a24c8d7e828"; 
+
+    asientoInstance.setAReservetoASeatForAFunction(seatId, functionId)
+        .then(result => {
+            console.log(result.message); 
+        })
+        .catch(err => {
+            console.error("Error:", err); 
+        })
+        .finally(() => {
+            Asiento.closeConnection();
+        });
 
      ``javascript
 
@@ -100,6 +173,24 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
      }).catch(err => {
          console.error("Error:", err);
      });
+
+     //common js
+
+     const asientoInstance = new Asiento();
+    const seatId = "64a7e409f7a42a24c8d7e82b";
+
+    asientoInstance.getAllTSeatsReservedByFunction(seatId)
+        .then(result => {
+            if (result.success) {
+                console.log("Seat details:", result.data);
+            } else {
+                console.log(result.message);
+            }
+        })
+        .catch(err => {
+            console.error("Error:", err);
+        });
+
      ```
 
      
@@ -137,6 +228,32 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
    
    let obj = new Cliente()
    console.log( await obj.createClientAndUser({ _id: new ObjectId(),nombre:"vincent",apellido:"Ruad",nick:"admnort",email:"exlpcampus@example.com","telefono":"3010284187",tipo_de_cliente:"",descuento:0,codigo_tarjeta:"",fecha_expedicion:null,estado: "", cedula: 1080091010, rol: "Administrador"}))
+
+   //common js
+
+   const clienteInstance = Cliente.getInstance();
+
+    clienteInstance.createClientAndUser({
+        _id: new ObjectId(),
+        nombre: "vincent",
+        apellido: "Ruad",
+        nick: "admnort",
+        email: "exlpcampus@example.com",
+        telefono: "3010284187",
+        tipo_de_cliente: "",
+        descuento: 0,
+        codigo_tarjeta: "",
+        fecha_expedicion: null,
+        estado: "",
+        cedula: 1080091010,
+        rol: "Administrador"
+    })
+    .then(result => {
+        console.log(result);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
    
    //Crear un "usuarioVIP"
    
@@ -158,6 +275,20 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
    const userId = "66aa0f35311f70d89314da1f";
    const userInfo = await cliente.getUserInfo(userId);
    console.log(userInfo);
+
+   //common.js
+
+   const cliente = new Cliente();
+    const userId = "66aa0f35311f70d89314da1f";
+
+    cliente.getUserInfo(userId)
+        .then(userInfo => {
+            console.log(userInfo);
+        })
+        .catch(error => {
+            console.error('Error fetching user info:', error);
+        });
+
    ```
 
 8. *API para Listar Usuarios:** Permitir la consulta de todos los usuarios del sistema, con la posibilidad de filtrar por rol (VIP, estándar o administrador).
@@ -166,6 +297,21 @@ Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando M
    //Se podrá consultar usuarios adicionales como 'usuarioVIP','Administrador',
    const clienteRol = new Cliente();
    console.log(await clienteRol.getUserByRoles('usuarioEstandar'));
+
+   //common.js
+
+    const clienteRol = new Cliente();
+    const rol = 'usuarioEstandar';
+
+    clienteRol.getUserByRoles(rol)
+        .then(userByRoles => {
+            console.log(userByRoles);
+        })
+        .catch(error => {
+            console.error('Error fetching users by role:', error);
+        });
+
+
    ```
 
 9. Compras en Línea:

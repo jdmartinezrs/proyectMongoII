@@ -1,59 +1,55 @@
-import { ObjectId } from "mongodb";
-import { connect } from "../../helpers/connect.js";
-import { log } from "console";
-ObjectId
+const Connect = require("../helpers/connect");
+const {ObjectId} = require ('mongodb');
 
-
-/**
- * * this is my Asiento class
- * @class
- * Represents the Asiento class, which manages seat operations in the database.
- */
-export class Asiento extends connect {
+module.exports = class Asiento extends Connect {
     static instance;
-    collection
+
+    // Constructor
     constructor() {
         super();
         this.collection = this.db.collection('asiento');
-        Asiento.instance = this;
-        return this;
     }
 
+    // Singleton instance getter
+    static async getInstance() {
+        if (!Asiento.instance) {
+            Asiento.instance = new Asiento(); // Should be Asiento, not Pelicula
+            await Asiento.instance.initialize();
+        }
+        return Asiento.instance;
+    }
 
     /**
-        * 2.2 Checks seat availability for a specific screening.
-        * @param {ObjectId} id_funcion - The ObjectId of the function to check.
-        * @returns {Array} - List of available seats.
-        */
+     * 2.2 Checks seat availability for a specific screening.
+     * @param {ObjectId} id_funcion - The ObjectId of the function to check.
+     * @returns {Array} - List of available seats.
+     */
     async getAllSeatsByFunction(id_funcion) {
-        let res;
         try {
             await this.conexion.connect();
-            res = await this.collection.aggregate([
+            const seats = await this.collection.aggregate([
                 {
                     $match: {
                         id_funcion: new ObjectId(id_funcion),
                         estado: "Por Asignar"
                     }
                 },
-                { $project: { _id: 1, fila: 1, codigo: 1, estado: 1, id_funcion: 1 } }
+                { 
+                    $project: { 
+                        _id: 0, 
+                        fila: 1, 
+                        codigo: 1, 
+                        estado: 1, 
+                        id_funcion: 1 
+                    } 
+                }
             ]).toArray();
+            return seats;
         } catch (err) {
             console.error("Error al obtener los asientos:", err);
-        } finally {
-            await this.conexion.close();
+            throw err;
         }
-        return res;
     }
-
-
-
-    /**
-     * 3.1 Reserve Seats: Allow the selection and reservation of seats for a specific screening.
-     * @param {ObjectId} seatId - The ObjectId of the seat to update.
-     * @param {ObjectId} functionId - The ObjectId of the function to assign to the seat.
-     * @returns {Object} - Status of the update operation.
-     */
     async setAReservetoASeatForAFunction(seatId, functionId) {
         let res;
         try {
@@ -65,7 +61,6 @@ export class Asiento extends connect {
                         estado: "Reservado",
                         id_funcion: new ObjectId(functionId)
                     }
-
                 }
             );
         } catch (err) {
@@ -80,23 +75,21 @@ export class Asiento extends connect {
 
         return {
             success: res.acknowledged,
-            message: "Asiento reservado con éxito"
+            message: "Asiento actualizado con éxito"
         };
     }
+    static closeConnection() {
+        if (Asiento.instance) {
+            Asiento.instance.close();
+            Asiento.instance = undefined;
+            console.log("Conexión a MongoDB cerrada");
+        }
+    }
 
-
-    /**
-      * Retrieves all seats for a specific function, including the room and time, 
-      * if the seat is "Reservado".
-      * @param {ObjectId} seatId - The ObjectId of the seat to check.
-      * @returns {Object} - Details of the seat or a message if not reserved.
-      */
     async getAllTSeatsReservedByFunction(seatId) {
         let res;
         try {
-
             await this.conexion.connect();
-
 
             const seat = await this.collection.findOne({ _id: new ObjectId(seatId) });
 
@@ -106,7 +99,6 @@ export class Asiento extends connect {
                     message: 'The seat is not reserved.'
                 };
             }
-
 
             res = await this.collection.aggregate([
                 {
@@ -143,7 +135,6 @@ export class Asiento extends connect {
                 message: "Error al obtener los asientos"
             };
         } finally {
-
             await this.conexion.close();
         }
 
@@ -152,18 +143,10 @@ export class Asiento extends connect {
             data: res
         };
     }
-
-
-    /**
-      *3.2 Cancels a reservation for a specific seat if it is reserved.
-      * @param {ObjectId} seatId - The ObjectId of the seat to cancel the reservation.
-      * @returns {Object} - Status of the update operation.
-      */
     async setACancelationtoAReservedSeat(seatId) {
         let res;
         try {
             await this.conexion.connect();
-
 
             const seat = await this.collection.findOne({ _id: new ObjectId(seatId) });
 
@@ -180,7 +163,6 @@ export class Asiento extends connect {
                     message: "The seat is not reserved and cannot be canceled."
                 };
             }
-
 
             res = await this.collection.updateOne(
                 { _id: new ObjectId(seatId) },
@@ -205,7 +187,4 @@ export class Asiento extends connect {
             message: "Reservation cancelled successfully"
         };
     }
-
-
-}
-
+};

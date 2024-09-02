@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/asientos.css">
+    <title>Document</title>
+ 
+</head>
+<body>
+
+    <div class="seat-selection">
+        <div class="nav">
+          <span class="back-arrow" onclick="fetchMovieDetails()">&lt;</span>
+          <span class="title" style="margin-top:10px; font-size: 21px; ">Choose Seat</span>
+          <span class="menu">...</span>
+        </div>
+        <div class="screen-indicator">
+            <img src="../storage/Sin título-1.png" alt=""style="width: 250px; height: auto; max-width: 100%;margin-top: 15px">
+          <div class="screen-text" style="font-size: 13px;">Screen This Way</div>
+        </div>
+      </div>
+
+
+    <section class="asientos">
+        <form id="myform" onchange="getSelectedSeats()">
+            <article class="asientos__normal">
+                <div fila="1">
+                    <small>A</small>
+                    <div class="asientos__lista">
+                        <input type="checkbox" name="seat" value="A1" id="A1"><label for="A1" data-place="1"></label>
+                        <input type="checkbox" name="seat" value="A2" id="A2"><label for="A2" data-place="2"></label>
+                        <input type="checkbox" name="seat" value="A3" id="A3"><label for="A3" data-place="3"></label>
+                        <input type="checkbox" name="seat" value="A4" id="A4"><label for="A4" data-place="4"></label>
+                        <input type="checkbox" name="seat" value="A5" id="A5"><label for="A5" data-place="5"></label>
+                    </div>
+                </div>
+                <div fila="2">
+                    <small>B</small>
+                    <div class="asientos__lista">
+                        <input type="checkbox" name="seat" value="B1" id="B1"><label for="B1" data-place="1"></label>
+                        <input type="checkbox" name="seat" value="B2" id="B2"><label for="B2" data-place="2"></label>
+                        <input type="checkbox" name="seat" value="B3" id="B3"><label for="B3" data-place="3"></label>
+                        <input type="checkbox" name="seat" value="B4" id="B4"><label for="B4" data-place="4"></label>
+                        <input type="checkbox" name="seat" value="B5" id="B5"><label for="B5" data-place="5"></label>
+                        <input type="checkbox" name="seat" value="B6" id="B6"><label for="B6" data-place="6"></label>
+                        <input type="checkbox" name="seat" value="B7" id="B7"><label for="B7" data-place="7"></label>
+                    </div>
+                </div>
+            </article>
+            <article class="asientos__preferenciales">
+                <div colum="3">
+                    <small>C</small>
+                    <div>
+                        <input type="checkbox" name="seat" value="C1" id="C1"><label for="C1" data-place="1"></label>
+                        <input type="checkbox" name="seat" value="C2" id="C2"><label for="C2" data-place="2"></label>
+                        <input type="checkbox" name="seat" value="C3" id="C3"><label for="C3" data-place="3"></label>
+                        <input type="checkbox" name="seat" value="C4" id="C4"><label for="C4" data-place="4"></label>
+                        <input type="checkbox" name="seat" value="C5" id="C5"><label for="C5" data-place="5"></label>
+                        <input type="checkbox" name="seat" value="C6" id="C6"><label for="C6" data-place="6"></label>
+                        <input type="checkbox" name="seat" value="C7" id="C7"><label for="C7" data-place="7"></label>
+                        <input type="checkbox" name="seat" value="C8" id="C8"><label for="C8" data-place="8"></label>
+                        <input type="checkbox" name="seat" value="C9" id="C9"><label for="C9" data-place="9"></label>
+                    </div>
+                </div>
+                <div colum="4">
+                    <small>D</small>
+                    <div>
+                        <input type="checkbox" name="seat" value="D1" id="D1"><label for="D1" data-place="1"></label>
+                        <input type="checkbox" name="seat" value="D2" id="D2"><label for="D2" data-place="2"></label>
+                        <input type="checkbox" name="seat" value="D3" id="D3"><label for="D3" data-place="3"></label>
+                        <input type="checkbox" name="seat" value="D4" id="D4"><label for="D4" data-place="4"></label>
+                        <input type="checkbox" name="seat" value="D5" id="D5"><label for="D5" data-place="5"></label>
+                        <input type="checkbox" name="seat" value="D6" id="D6"><label for="D6" data-place="6"></label>
+                        <input type="checkbox" name="seat" value="D7" id="D7"><label for="D7" data-place="7"></label>
+                        <input type="checkbox" name="seat" value="D8" id="D8"><label for="D8" data-place="8"></label>
+                        <input type="checkbox" name="seat" value="D9" id="D9"><label for="D9" data-place="9"></label>
+                    </div>
+                </div>
+                <div colum="5">
+                    <small>E</small>
+                    <div>
+                        <input type="checkbox" name="seat" value="E1" id="E1"><label for="E1" data-place="1"></label>
+                        <input type="checkbox" name="seat" value="E2" id="E2"><label for="E2" data-place="2"></label>
+                        <input type="checkbox" name="seat" value="E3" id="E3"><label for="E3" data-place="3"></label>
+                        <input type="checkbox" name="seat" value="E4" id="E4"><label for="E4" data-place="4"></label>
+                        <input type="checkbox" name="seat" value="E5" id="E5"><label for="E5" data-place="5"></label>
+                        <input type="checkbox" name="seat" value="E6" id="E6"><label for="E6" data-place="6"></label>
+                        <input type="checkbox" name="seat" value="E7" id="E7"><label for="E7" data-place="7"></label>
+                        <input type="checkbox" name="seat" value="E8" id="E8"><label for="E8" data-place="8"></label>
+                        <input type="checkbox" name="seat" value="E9" id="E9"><label for="E9" data-place="9"></label>
+                    </div>
+                </div>
+                <div colum="6">
+                    <small>F</small>
+                    <div>
+                        <input type="checkbox" name="seat" value="F1" id="F1"><label for="F1" data-place="1"></label>
+                        <input type="checkbox" name="seat" value="F2" id="F2"><label for="F2" data-place="2"></label>
+                        <input type="checkbox" name="seat" value="F3" id="F3"><label for="F3" data-place="3"></label>
+                        <input type="checkbox" name="seat" value="F4" id="F4"><label for="F4" data-place="4"></label>
+                        <input type="checkbox" name="seat" value="F5" id="F5"><label for="F5" data-place="5"></label>
+                        <input type="checkbox" name="seat" value="F6" id="F6"><label for="F6" data-place="6"></label>
+                        <input type="checkbox" name="seat" value="F7" id="F7"><label for="F7" data-place="7"></label>
+                        <input type="checkbox" name="seat" value="F8" id="F8"><label for="F8" data-place="8"></label>
+                        <input type="checkbox" name="seat" value="F9" id="F9"><label for="F9" data-place="9"></label>
+                    </div>
+                </div>  
+            </article>
+          </form>
+
+            <article class="asientos__menu">
+              
+                <div class="menu-item">
+                  <div class="available"></div>
+                    <small></small>
+                    <label>Available</label>
+                </div>
+                
+                <div class="menu-item">
+                  <div class="reserved"></div>
+                    <small></small>
+                    <label>Reserved</label>
+                </div>
+
+                <div class="menu-item">
+                  <div class="selected"></div>
+                    <small></small>
+                    <label>Selected</label>
+                </div>
+
+            </article>
+          </form>
+
+          <div class="calendar">
+            <div class="day-container">
+              <div class="day" onclick='loadDays("Monday")'>
+                <span class="weekday">Mon</span>
+                <span class="date">26</span>
+              </div>
+              <div class="day" onclick='loadDays("Tuesday")'>
+                <span class="weekday">Tue</span>
+                <span class="date">27</span>
+              </div>
+              <div class="day" onclick='loadDays("Wednesday")'>
+                <span class="weekday">Wed</span>
+                <span class="date">28</span>
+              </div>
+
+              <div class="day" onclick='loadDays("Thursday")'>
+                <span class="weekday">Thu</span>
+                <span class="date">29</span>
+              </div>
+
+              <div class="day" onclick='loadDays("Friday")'>
+                <span class="weekday">Fri</span>
+                <span class="date">30</span>
+              </div>
+
+              <div class="day" onclick='loadDays("Saturday")'>
+                <span class="weekday">Sat</span>
+                <span class="date">31</span>
+              </div>
+
+              <div class="day" onclick='loadDays("Sunday")'>
+                <span class="weekday">Sun</span>
+                <span class="date">01</span>
+              </div>
+            </div>
+          </div>
+          
+          <div id="carousel">
+          </div>
+        
+          <div class="ticket-container">
+            <div class="organization">
+                <p class="price2">Price</p>
+                <p class="value2" style="font-size: 21px">$0</p>
+            </div>
+            <button class="buy-ticket" onclick="PostReservation(localStorage.getItem('showId'),localStorage.getItem('seats'))">Buy ticket</button>
+        </div>
+        <script>
+          const urlParams = new URLSearchParams(window.location.search);
+          const movieId = urlParams.get('id')
+          async function loadDays(dayToday) {
+            const response = await fetch(`http://localhost:5069/seats/${movieId}/${dayToday}`);
+            const days = await response.json();
+            const hoursContainer = document.getElementById('carousel');
+            hoursContainer.innerHTML = "";
+          
+            // Store the selected day in localStorage
+            localStorage.setItem('selectedDay', dayToday);
+          
+            days.forEach(day => {
+              hoursContainer.innerHTML += `
+              <div class="time-slot" onclick="loadSeats(event, '${dayToday}')">
+                <span class="time">${day.time}</span>
+                <span class="price">$${day.price} •${day.type}</span>
+              </div>
+              `;
+            });
+          }
+          async function loadSeats (event, day) {
+            const clickedDiv = event.currentTarget;
+            const time = clickedDiv.querySelector("span.time");
+
+            const response = await fetch(`http://localhost:5069/seats/${movieId}/${day}`);
+            const days = await response.json();
+            days.forEach(day => {
+              if (day.time === time.textContent) {
+                const form = document.getElementById("myform")
+                localStorage.setItem("showId",day._id)
+                localStorage.setItem("precio",event.target.querySelector("span.price").textContent.split(" ")[0])
+                localStorage.setItem("time", day.time)
+
+
+                let asientosNormal = '<article class="asientos__normal">'
+                let fila1 = ""
+                for (let i = 0; i < 5; i++) {
+                  const seat = day.seats[i];
+                  if (seat.status === "reserved") {
+                    fila1 += `<input type="checkbox" disabled class="reserved" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  } else {
+                    fila1 += `<input type="checkbox" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  }
+                }
+                asientosNormal += `<div fila="1">
+                  <small>A</small>
+                    <div class="asientos__lista">
+                    ${fila1}
+                    </div>
+                </div>`
+
+                let fila2 = ""
+                for (let i = 5; i < 12; i++) {
+                  const seat = day.seats[i];
+                  if (seat.status === "reserved") {
+                    fila2 += `<input type="checkbox" disabled class="reserved" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  } else {
+                    fila2 += `<input type="checkbox" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  }
+                }
+                asientosNormal += `<div fila="2">
+                  <small>B</small>
+                    <div class="asientos__lista">
+                    ${fila2}
+                    </div>
+                </div>`
+                asientosNormal += '</article>'
+
+
+
+
+
+                let asientosPreferenciales = '<article class="asientos__preferenciales">'
+                let fila3 = ""
+                for (let i = 12; i < 21; i++) {
+                  const seat = day.seats[i];
+                  if (seat.status === "reserved") {
+                    fila3 += `<input type="checkbox" disabled class="reserved" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  } else {
+                    fila3 += `<input type="checkbox" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  }
+                }
+                asientosPreferenciales += `<div fila="3">
+                  <small>C</small>
+                    <div class="asientos__lista">
+                    ${fila3}
+                    </div>
+                </div>`
+
+                let fila4 = ""
+                for (let i = 21; i < 30; i++) {
+                  const seat = day.seats[i];
+                  if (seat.status === "reserved") {
+                    fila4 += `<input type="checkbox" disabled class="reserved" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  } else {
+                    fila4 += `<input type="checkbox" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  }
+                }
+                asientosPreferenciales += `<div fila="4">
+                  <small>D</small>
+                    <div class="asientos__lista">
+                    ${fila4}
+                    </div>
+                </div>`
+
+                let fila5 = ""
+                for (let i = 30; i < 39; i++) {
+                  const seat = day.seats[i];
+                  if (seat.status === "reserved") {
+                    fila5 += `<input type="checkbox" disabled class="reserved" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  } else {
+                    fila5 += `<input type="checkbox" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  }
+                }
+                asientosPreferenciales += `<div fila="5">
+                  <small>E</small>
+                    <div class="asientos__lista">
+                    ${fila5}
+                    </div>
+                </div>`
+
+                let fila6 = ""
+                for (let i = 39; i < 48; i++) {
+                  const seat = day.seats[i];
+                  if (seat.status === "reserved") {
+                    fila6 += `<input type="checkbox" disabled class="reserved" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  } else {
+                    fila6 += `<input type="checkbox" name="seat" value="${seat.seat}" id="${seat.seat}"><label for="${seat.seat}" data-place="${i+1}"></label>`
+                  }
+                }
+                asientosPreferenciales += `<div fila="6">
+                  <small>F</small>
+                    <div class="asientos__lista">
+                    ${fila6}
+                    </div>
+                </div>`
+                asientosPreferenciales += '</article>'
+                form.innerHTML=`
+                  ${asientosNormal}
+                  ${asientosPreferenciales}                
+                `
+              }
+            })
+          }  
+          function fetchMovieDetails() {
+            fetch(`http://localhost:5069/movies/${movieId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // After fetching the movie details, redirect to the movie details page
+                    window.location.href = `http://localhost:5069/movieselected?id=${movieId}&name=${encodeURIComponent(data.name)}`;
+                })
+                .catch(error => console.error('Error fetching movie details:', error));
+        }
+        function getSelectedSeats() {
+          let totalPrice = localStorage.getItem("precio")
+          let selectedSeats = document.querySelectorAll('input[type=checkbox]:checked');
+          
+          // Convert price to cents
+          totalPrice = Math.round(parseFloat(totalPrice.replace('$', '')) * 100);
+          totalPrice = totalPrice * selectedSeats.length;
+          
+          let selectedSeatsId = [];
+          for (let i = 0; i < selectedSeats.length; i++) {
+            const seat = selectedSeats[i];
+            selectedSeatsId.push(seat.id);
+          }
+          selectedSeatsId = selectedSeatsId.toString();
+          
+          // Convert back to dollars and cents
+          totalPrice = (totalPrice / 100).toFixed(2);
+          
+          const totalPriceP = document.querySelector("p.value2");
+          totalPriceP.textContent = `Total: $${totalPrice}`;
+          localStorage.setItem("seats", selectedSeatsId);
+          localStorage.setItem("totalprice", totalPrice);
+        }
+        const PostReservation = async(showId, seatsToReserve) => {
+          try {
+            const response = await fetch(`http://localhost:5069/seats/${showId}/seatsToReserve`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ 
+                "showId": showId,
+                "seatsToReserve": seatsToReserve 
+              }),
+            });
+        
+            if (response.ok) {
+              const selectedDay = localStorage.getItem('selectedDay');
+              const time = localStorage.getItem('time');
+              const roomId = localStorage.getItem('roomId') || 'Cinema A';
+              const seats = localStorage.getItem('seats');
+              const totalPrice = localStorage.getItem('totalprice');
+        
+              // Fetch movie details
+              const movieResponse = await fetch(`http://localhost:5069/movies/${movieId}`);
+              const movieData = await movieResponse.json();
+        
+              // Redirect to the factura page with all the data as URL parameters
+              window.location.href = `http://localhost:5069/factura?day=${selectedDay}&time=${time}&room=${roomId}&seats=${seats}&price=${encodeURIComponent(totalPrice)}&movieImage=${encodeURIComponent(movieData.movie_image)}&movieName=${encodeURIComponent(movieData.name)}`;
+            } else {
+              console.error('Reservation failed');
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        };
+        
+        </script>
+</body>
+</html>
+
+
+

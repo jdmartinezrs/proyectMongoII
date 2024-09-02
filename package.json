@@ -2,9 +2,9 @@
   "name": "proyectmongoii",
   "version": "1.0.0",
   "main": "main.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
-    "dev": "node --watch --env-file=.env main.js",
+    "dev": "node --watch --env-file .env app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,7 +12,10 @@
   "license": "ISC",
   "description": "Desarrollar una serie de APIs para la aplicación web de CineCampus utilizando MongoDB como base de datos. Las APIs deberán gestionar la selección de películas, la compra de boletos, la asignación de asientos, y la implementación de descuentos para tarjetas VIP, con soporte para diferentes roles de usuario.",
   "dependencies": {
-    "mongodb": "^6.8.0"
+    "express": "^4.19.2",
+    "express-validator": "^7.2.0",
+    "mongodb": "^6.8.0",
+    "path": "^0.12.7"
   }
 }
 

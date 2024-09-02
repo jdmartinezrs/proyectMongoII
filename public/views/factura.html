@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Ticket</title>
+    <link rel="stylesheet" href="/css/factura.css">
+    <script src="../ws.js"></script>
+</head>
+<body>
+    <div class="nav">
+      <span class="back-arrow-especific">&lt;</span>
+      <span class="title" style="margin-top:10px; font-size: 21px; "></span>
+      <p class="menu">Cinema Selection</p>
+    </div>
+
+    <div class="ticket">
+        <img src="" alt="" class="movie-poster">
+        <div class="title-container">
+            <h1 class="ticket-title"></h1>
+            <p><small>Show this ticket at the entrance</small></p>
+        </div>
+      
+        <div class="ticket-body">
+            <div class="cinemaname"> 
+                <div class="cinemaname-info"><p>cinema</p>
+                    <h2>CineCampus</h2></div>
+                <div >
+                    <img class="imagecampus" src="/storage/campus.jpg" alt="">
+                </div>
+            </div>
+
+            <div class="date-show">
+               <div class="date-show-day">
+                <p>Date</p>
+                <p class="dia"></p>
+               </div>
+               <div class="date-show-time">
+                 <p>Time</p>
+                    <p class="tiempo"></p>
+               </div>
+            </div>
+
+            <div class="cinema-seat">
+                <div class="room">
+                    <p>Cinema Hall</p>
+                    <p class="sala"></p>
+                </div>
+                <div class="room-seat">
+                    <p class="room-seat-id">Seat</p>
+                    <p class="asiento"></p>
+                </div>
+            </div>
+
+            <div class="room-cost">
+                <div class="room-cost-price">
+                 <p>cost</p>
+                 <p class="price"></p>
+                </div>
+                <div class="room-ticket-id">
+                  <p>Order ID</p>
+                     <p>122554889</p>
+                </div>
+           </div>
+        </div>
+        
+        <div class="ticket-footer">
+            <img class= "codigo" src="/storage/codigo.avif" alt="Barcode">
+        </div>
+    </div>
+
+    <script>
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+          }
+          
+          function formatPrice(price) {
+            return '$' + parseFloat(price).toFixed(2);
+          }
+          
+          // Populate ticket information
+          document.querySelector('.movie-poster').src = getUrlParameter('movieImage');
+          document.querySelector('.ticket-title').textContent = getUrlParameter('movieName');
+          document.querySelector('.dia').textContent = getUrlParameter('day');
+          document.querySelector('.tiempo').textContent = getUrlParameter('time');
+          document.querySelector('.sala').textContent = getUrlParameter('room');
+          document.querySelector('.asiento').textContent = getUrlParameter('seats');
+          document.querySelector('.price').textContent = formatPrice(getUrlParameter('price'));
+    </script>
+</body>
+</html>

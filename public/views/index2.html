@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App</title>
+    <link rel="stylesheet" href="/css/styles2.css">
+    <script src="../ws.js"></script>
+    
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="header">
+            <img src="/storage/20240724_151411 (1).webp" alt="Profile" class="profile-pic">
+            <div class="user-greeting">
+                <p>Hi, Ferrucio Tuccinel</p>
+                <p>Let's watch a movie together!</p>
+            </div>
+        </header>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Search movie, cinema, genre...">
+        </div>
+
+        <section class="now-playing">
+            <div class="titles">
+                <h2 class="section-title">Now Playing</h2>
+                <h2 class="section-title2">See all</h2>
+            </div>
+            
+            <div class="slider">
+                <div class="movie-list">
+                    <div class="movie-card">
+                        <img src="" alt="Movie 1" class="movie-poster">
+                    </div>
+                    <div class="movie-card">
+                        <img src="" alt="Movie 2" class="movie-poster">
+                        
+                    </div>
+                    <div class="movie-card">
+                        <img src="" alt="Movie 3" class="movie-poster">
+                        
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button class="prev">❮</button>
+                    <button class="next">❯</button>
+                </div>
+                <div class="slider-dots">
+                    <span class="dot" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                </div>
+            </div>
+<div class="movie-info">
+    <p class="movie-title"></p>
+    <p class="movie-genre"></p>
+</div>
+                <div class="letters">
+                    <h2>Comming Soon</h2>
+                    <h2>See All</h2> 
+            </div>
+
+            <div class="contpro">
+                <!-- Movie 1 -->
+                <div class="contpro__cont" id="movie1-container">
+                    <img class="imgC" src="" alt="Movie 1" id="movie1-poster">
+                    <div class="contN">
+                        <div class="nombre">
+                            <p id="movie1-title"></p>
+                            <p id="movie1-year"></p>
+                        </div>
+                        <p id="movie1-genre"></p>
+                    </div>
+                </div>
+                <!-- Movie 2 -->
+                <div class="contpro__cont" id="movie2-container">
+                    <img class="imgC" src="" alt="Movie 2" id="movie2-poster">
+                    <div class="contN">
+                        <div class="nombre">
+                            <p id="movie2-title"></p>
+                            <p id="movie2-year"></p>
+                        </div>
+                        <p id="movie2-genre"></p>
+                    </div>
+                </div>
+                <!-- Movie 3 -->
+                <div class="contpro__cont" id="movie3-container">
+                    <img class="imgC" src="" alt="Movie 3" id="movie3-poster">
+                    <div class="contN">
+                        <div class="nombre">
+                            <p id="movie3-title"></p>
+                            <p id="movie3-year"></p>
+                        </div>
+                        <p id="movie3-genre"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+      <footer class="navigation">    
+            <a href=""> 
+                <img src="../storage/house.png" alt="">
+                Home</a>
+          
+            <a href="">
+                <img src="../storage/lupa.png" alt="">
+                Browse</a>
+            <a href="">
+                <img src="../storage/rare.png" alt="">
+                Tickets</a>
+            <a href="">
+                <img src="../storage/character.png" alt="">
+                Profile</a>   
+      </footer>   
+   
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slider = document.querySelector('.movie-list');
+            const dots = document.querySelectorAll('.slider-dots .dot');
+            let currentIndex = 0;
+            
+            function updateSlider(index) {
+                slider.style.transform = `translateX(-${index * 50}%)`;
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[index].classList.add('active');
+            }
+            
+            document.querySelector('.prev').addEventListener('click', () => {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : dots.length - 1;
+                updateSlider(currentIndex);
+            });
+            
+            document.querySelector('.next').addEventListener('click', () => {
+                currentIndex = (currentIndex < dots.length - 1) ? currentIndex + 1 : 0;
+                updateSlider(currentIndex);
+            });
+            
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    currentIndex = parseInt(dot.getAttribute('data-slide'));
+                    updateSlider(currentIndex);
+                });
+            });
+            updateSlider(currentIndex);
+        });
+    </script>
+</body>
+</html>
