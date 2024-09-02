@@ -1,9 +1,15 @@
-MONGO_USER="cineAdmin"
-MONGO_PWD="davidR10"
+MONGO_USER="Martinez"
+MONGO_PWD="claveSecreta"
 MONGO_HOST="mongodb://"
-MONGO_PORT=23288
-MONGO_CLUSTER="monorail.proxy.rlwy.net"
+MONGO_PORT=27017
+MONGO_CLUSTER= 172.16.103.133
 MONGO_DB="cineCampus"
+
+
+
+EXPRESS_HOST="localhost"
+EXPRESS_PORT=5069
+EXPRESS_STATIC="public”
 
 
 

@@ -1,3 +1,1411 @@
+**MOVIES**
+
+*Movies in theaters*
+
+**Method** : `GET`
+
+**URL** : http://localhost:5069/movies/in-theaters
+
+## Success Responses
+
+```js
+[
+  {
+    "_id": "64dedf4e9b5f1f7b0f8a2c3d",
+    "name": "Killers Of The Flower Moon",
+    "genre": "Crime Drama",
+    "movie_image": "https://mycima.lol/wp-content/uploads/2023/11/MV5BNjQwOGM2YTItMGYwNC00YTM4LWI0Y2QtZjQ2ZDcyMmRjMTFhXkEyXkFqcGdeQXVyMDM2NDM2MQ@@-scaled.jpg"
+  },
+  {
+    "_id": "64dedf4e9b5f1f7b0f8a2c3e",
+    "name": "Pulp Fiction",
+    "genre": "crime",
+    "movie_image": "https://image.tmdb.org/t/p/original/pbWgQPC6l9pkpEpi3WNRSfWYNP6.jpg"
+  },
+  {
+    "_id": "64dedf4e9b5f1f7b0f8a2c3f",
+    "name": "The Godfather",
+    "genre": "crime",
+    "movie_image": "https://i.etsystatic.com/27928788/r/il/4aaa89/3000980481/il_1140xN.3000980481_5txr.jpg"
+  }
+]
+```
+
+![image-20240902100128550](/home/camper/.config/Typora/typora-user-images/image-20240902100128550.png)
+
+
+
+
+
+*Movies Coming Soon*
+
+**Method** : `GET`
+
+**URL** :http://localhost:5069/movies/coming-soon
+
+## Success Responses
+
+```js
+[
+  {
+    "name": "Dune Part Two",
+    "genre": "science fiction",
+    "movie_image": "https://deadline.com/wp-content/uploads/2024/02/Dune-Part-Two-Dolby-Poster.jpg?w=1280",
+    "year": 2024
+  },
+  {
+    "name": "Avatar: The Way of Water",
+    "genre": "science fiction",
+    "movie_image": "https://lumiere-a.akamaihd.net/v1/images/p_disneyplusoriginals_avatar_thewayofwater_poster_rebra_fa08636d.jpeg",
+    "year": 2024
+  },
+  {
+    "name": "Alien 7",
+    "genre": "action",
+    "movie_image": "https://i.blogs.es/6b4c06/alien-romulus-poster-japones/1366_2000.jpeg",
+    "year": 2024
+  }
+]
+```
+
+![image-20240902100636561](/home/camper/.config/Typora/typora-user-images/image-20240902100636561.png)
+
+
+
+
+
+*Movies Coming Soon*
+
+**Method** : `GET`
+
+**URL** :http://localhost:5069/movies/64dedf4e9b5f1f7b0f8a2c3d
+
+"http://localhost:5069/movies/${*movieId*}" 
+
+## Success Responses
+
+
+
+```js
+{
+  "_id": "64dedf4e9b5f1f7b0f8a2c3d",
+  "name": "Killers Of The Flower Moon",
+  "genre": "Crime Drama",
+  "synopsis": "Miembros de la tribu Osage del noreste de Oklahoma son asesinados en circunstancias misteriosas en la década de 1920, lo que desencadena una importante investigación del FBI dirigida por un J. Edgar Hoover de 29 años y el exranger de Texas Tom White",
+  "trailer": "https://www.youtube.com/watch?v=7cx9nCHsemc",
+  "movie_image": "https://mycima.lol/wp-content/uploads/2023/11/MV5BNjQwOGM2YTItMGYwNC00YTM4LWI0Y2QtZjQ2ZDcyMmRjMTFhXkEyXkFqcGdeQXVyMDM2NDM2MQ@@-scaled.jpg",
+  "cast": [
+    {
+      "name": "Leonardo DiCaprio",
+      "character": "Ernest Burkhart",
+      "actor_image": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Leonardo_DiCaprio_in_2023_%28cropped%29.png"
+    },
+    {
+      "name": "Robert De Niro",
+      "character": "William Hale",
+      "actor_image": "https://upload.wikimedia.org/wikipedia/commons/5/58/Robert_De_Niro_Cannes_2016.jpg"
+    },
+    {
+      "name": "Elliot Page",
+      "character": "Ariadne",
+      "actor_image": "https://www.thepinknews.com/wp-content/uploads/2023/06/Elliot-Page-opens-up-about-shingles-on-Inception-set.-Getty.jpg"
+    },
+    {
+      "name": "Tom Hardy",
+      "character": "Eames",
+      "actor_image": "https://image.tmdb.org/t/p/w500/yVGF9FvDxTDPhGimTbZNfghpllA.jpg"
+    }
+  ]
+}
+```
+
+
+
+![image-20240902101626299](/home/camper/.config/Typora/typora-user-images/image-20240902101626299.png)
+
+
+**seats**
+
+*get Movie Show By Day*
+
+**Method** : `GET`
+
+**URL** :http://localhost:5069/seats/:movieId/:dayOfWeek
+
+**Example:** http://localhost:5069/seats/64dedf4e9b5f1f7b0f8a2c3d/Sunday
+
+```js
+[
+  {
+    "_id": "64dedf4e9b5f1f7b0f8a3025",
+    "date": "01",
+    "day": "Sunday",
+    "price": 4.75,
+    "type": "2D",
+    "time": "11:30",
+    "seats": [
+      {
+        "seat": "G1",
+        "status": "available"
+      },
+      {
+        "seat": "G2",
+        "status": "available"
+      },
+      {
+        "seat": "G3",
+        "status": "available"
+      },
+      {
+        "seat": "G4",
+        "status": "available"
+      },
+      {
+        "seat": "G5",
+        "status": "available"
+      },
+      {
+        "seat": "H1",
+        "status": "available"
+      },
+      {
+        "seat": "H2",
+        "status": "available"
+      },
+      {
+        "seat": "H3",
+        "status": "available"
+      },
+      {
+        "seat": "H4",
+        "status": "available"
+      },
+      {
+        "seat": "H5",
+        "status": "available"
+      },
+      {
+        "seat": "H6",
+        "status": "available"
+      },
+      {
+        "seat": "H7",
+        "status": "available"
+      },
+      {
+        "seat": "I1",
+        "status": "available"
+      },
+      {
+        "seat": "I2",
+        "status": "available"
+      },
+      {
+        "seat": "I3",
+        "status": "available"
+      },
+      {
+        "seat": "I4",
+        "status": "available"
+      },
+      {
+        "seat": "I5",
+        "status": "available"
+      },
+      {
+        "seat": "I6",
+        "status": "available"
+      },
+      {
+        "seat": "I7",
+        "status": "available"
+      },
+      {
+        "seat": "I8",
+        "status": "available"
+      },
+      {
+        "seat": "I9",
+        "status": "available"
+      },
+      {
+        "seat": "J1",
+        "status": "available"
+      },
+      {
+        "seat": "J2",
+        "status": "available"
+      },
+      {
+        "seat": "J3",
+        "status": "available"
+      },
+      {
+        "seat": "J4",
+        "status": "available"
+      },
+      {
+        "seat": "J5",
+        "status": "available"
+      },
+      {
+        "seat": "J6",
+        "status": "available"
+      },
+      {
+        "seat": "J7",
+        "status": "available"
+      },
+      {
+        "seat": "J8",
+        "status": "available"
+      },
+      {
+        "seat": "J9",
+        "status": "available"
+      },
+      {
+        "seat": "K1",
+        "status": "available"
+      },
+      {
+        "seat": "K2",
+        "status": "available"
+      },
+      {
+        "seat": "K3",
+        "status": "available"
+      },
+      {
+        "seat": "K4",
+        "status": "available"
+      },
+      {
+        "seat": "K5",
+        "status": "available"
+      },
+      {
+        "seat": "K6",
+        "status": "available"
+      },
+      {
+        "seat": "K7",
+        "status": "available"
+      },
+      {
+        "seat": "K8",
+        "status": "available"
+      },
+      {
+        "seat": "K9",
+        "status": "available"
+      },
+      {
+        "seat": "L1",
+        "status": "available"
+      },
+      {
+        "seat": "L2",
+        "status": "available"
+      },
+      {
+        "seat": "L3",
+        "status": "available"
+      },
+      {
+        "seat": "L4",
+        "status": "available"
+      },
+      {
+        "seat": "L5",
+        "status": "available"
+      },
+      {
+        "seat": "L6",
+        "status": "available"
+      },
+      {
+        "seat": "L7",
+        "status": "available"
+      },
+      {
+        "seat": "L8",
+        "status": "available"
+      },
+      {
+        "seat": "L9",
+        "status": "reserved"
+      }
+    ]
+  },
+  {
+    "_id": "64dedf4e9b5f1f7b0f8ae002",
+    "date": "01",
+    "day": "Sunday",
+    "price": 4.75,
+    "type": "2D",
+    "time": "13:00",
+    "seats": [
+      {
+        "seat": "M1",
+        "status": "available"
+      },
+      {
+        "seat": "M2",
+        "status": "available"
+      },
+      {
+        "seat": "M3",
+        "status": "available"
+      },
+      {
+        "seat": "M4",
+        "status": "available"
+      },
+      {
+        "seat": "M5",
+        "status": "available"
+      },
+      {
+        "seat": "N1",
+        "status": "available"
+      },
+      {
+        "seat": "N2",
+        "status": "available"
+      },
+      {
+        "seat": "N3",
+        "status": "available"
+      },
+      {
+        "seat": "N4",
+        "status": "available"
+      },
+      {
+        "seat": "N5",
+        "status": "available"
+      },
+      {
+        "seat": "N6",
+        "status": "available"
+      },
+      {
+        "seat": "N7",
+        "status": "available"
+      },
+      {
+        "seat": "O1",
+        "status": "available"
+      },
+      {
+        "seat": "O2",
+        "status": "available"
+      },
+      {
+        "seat": "O3",
+        "status": "available"
+      },
+      {
+        "seat": "O4",
+        "status": "available"
+      },
+      {
+        "seat": "O5",
+        "status": "available"
+      },
+      {
+        "seat": "O6",
+        "status": "available"
+      },
+      {
+        "seat": "O7",
+        "status": "available"
+      },
+      {
+        "seat": "O8",
+        "status": "available"
+      },
+      {
+        "seat": "O9",
+        "status": "available"
+      },
+      {
+        "seat": "P1",
+        "status": "available"
+      },
+      {
+        "seat": "P2",
+        "status": "available"
+      },
+      {
+        "seat": "P3",
+        "status": "available"
+      },
+      {
+        "seat": "P4",
+        "status": "available"
+      },
+      {
+        "seat": "P5",
+        "status": "available"
+      },
+      {
+        "seat": "P6",
+        "status": "available"
+      },
+      {
+        "seat": "P7",
+        "status": "available"
+      },
+      {
+        "seat": "P8",
+        "status": "available"
+      },
+      {
+        "seat": "P9",
+        "status": "available"
+      },
+      {
+        "seat": "Q1",
+        "status": "available"
+      },
+      {
+        "seat": "Q2",
+        "status": "available"
+      },
+      {
+        "seat": "Q3",
+        "status": "available"
+      },
+      {
+        "seat": "Q4",
+        "status": "available"
+      },
+      {
+        "seat": "Q5",
+        "status": "available"
+      },
+      {
+        "seat": "Q6",
+        "status": "available"
+      },
+      {
+        "seat": "Q7",
+        "status": "available"
+      },
+      {
+        "seat": "Q8",
+        "status": "available"
+      },
+      {
+        "seat": "Q9",
+        "status": "available"
+      },
+      {
+        "seat": "R1",
+        "status": "available"
+      },
+      {
+        "seat": "R2",
+        "status": "available"
+      },
+      {
+        "seat": "R3",
+        "status": "available"
+      },
+      {
+        "seat": "R4",
+        "status": "available"
+      },
+      {
+        "seat": "R5",
+        "status": "available"
+      },
+      {
+        "seat": "R6",
+        "status": "available"
+      },
+      {
+        "seat": "R7",
+        "status": "available"
+      },
+      {
+        "seat": "R8",
+        "status": "available"
+      },
+      {
+        "seat": "R9",
+        "status": "available"
+      }
+    ]
+  },
+  {
+    "_id": "64dedf4e9b5f1f7b0f8a2cba",
+    "date": "01",
+    "day": "Sunday",
+    "price": 7.85,
+    "type": "3D",
+    "time": "15:45",
+    "seats": [
+      {
+        "seat": "A1",
+        "status": "available"
+      },
+      {
+        "seat": "A2",
+        "status": "available"
+      },
+      {
+        "seat": "A3",
+        "status": "available"
+      },
+      {
+        "seat": "A4",
+        "status": "available"
+      },
+      {
+        "seat": "A5",
+        "status": "available"
+      },
+      {
+        "seat": "B1",
+        "status": "available"
+      },
+      {
+        "seat": "B2",
+        "status": "available"
+      },
+      {
+        "seat": "B3",
+        "status": "available"
+      },
+      {
+        "seat": "B4",
+        "status": "available"
+      },
+      {
+        "seat": "B5",
+        "status": "available"
+      },
+      {
+        "seat": "B6",
+        "status": "available"
+      },
+      {
+        "seat": "B7",
+        "status": "available"
+      },
+      {
+        "seat": "C1",
+        "status": "available"
+      },
+      {
+        "seat": "C2",
+        "status": "available"
+      },
+      {
+        "seat": "C3",
+        "status": "available"
+      },
+      {
+        "seat": "C4",
+        "status": "available"
+      },
+      {
+        "seat": "C5",
+        "status": "available"
+      },
+      {
+        "seat": "C6",
+        "status": "available"
+      },
+      {
+        "seat": "C7",
+        "status": "available"
+      },
+      {
+        "seat": "C8",
+        "status": "available"
+      },
+      {
+        "seat": "C9",
+        "status": "available"
+      },
+      {
+        "seat": "D1",
+        "status": "available"
+      },
+      {
+        "seat": "D2",
+        "status": "available"
+      },
+      {
+        "seat": "D3",
+        "status": "available"
+      },
+      {
+        "seat": "D4",
+        "status": "available"
+      },
+      {
+        "seat": "D5",
+        "status": "available"
+      },
+      {
+        "seat": "D6",
+        "status": "available"
+      },
+      {
+        "seat": "D7",
+        "status": "available"
+      },
+      {
+        "seat": "D8",
+        "status": "available"
+      },
+      {
+        "seat": "D9",
+        "status": "available"
+      },
+      {
+        "seat": "E1",
+        "status": "available"
+      },
+      {
+        "seat": "E2",
+        "status": "available"
+      },
+      {
+        "seat": "E3",
+        "status": "available"
+      },
+      {
+        "seat": "E4",
+        "status": "available"
+      },
+      {
+        "seat": "E5",
+        "status": "available"
+      },
+      {
+        "seat": "E6",
+        "status": "available"
+      },
+      {
+        "seat": "E7",
+        "status": "available"
+      },
+      {
+        "seat": "E8",
+        "status": "available"
+      },
+      {
+        "seat": "E9",
+        "status": "available"
+      },
+      {
+        "seat": "F1",
+        "status": "available"
+      },
+      {
+        "seat": "F2",
+        "status": "available"
+      },
+      {
+        "seat": "F3",
+        "status": "available"
+      },
+      {
+        "seat": "F4",
+        "status": "available"
+      },
+      {
+        "seat": "F5",
+        "status": "available"
+      },
+      {
+        "seat": "F6",
+        "status": "available"
+      },
+      {
+        "seat": "F7",
+        "status": "available"
+      },
+      {
+        "seat": "F8",
+        "status": "available"
+      },
+      {
+        "seat": "F9",
+        "status": "available"
+      }
+    ]
+  },
+  {
+    "_id": "64dedf4e9b5f1f7b0f8a3028",
+    "date": "01",
+    "day": "Sunday",
+    "price": 5.75,
+    "type": "2D",
+    "time": "18:50",
+    "seats": [
+      {
+        "seat": "G1",
+        "status": "available"
+      },
+      {
+        "seat": "G2",
+        "status": "available"
+      },
+      {
+        "seat": "G3",
+        "status": "available"
+      },
+      {
+        "seat": "G4",
+        "status": "available"
+      },
+      {
+        "seat": "G5",
+        "status": "available"
+      },
+      {
+        "seat": "H1",
+        "status": "available"
+      },
+      {
+        "seat": "H2",
+        "status": "available"
+      },
+      {
+        "seat": "H3",
+        "status": "available"
+      },
+      {
+        "seat": "H4",
+        "status": "available"
+      },
+      {
+        "seat": "H5",
+        "status": "available"
+      },
+      {
+        "seat": "H6",
+        "status": "available"
+      },
+      {
+        "seat": "H7",
+        "status": "available"
+      },
+      {
+        "seat": "I1",
+        "status": "available"
+      },
+      {
+        "seat": "I2",
+        "status": "available"
+      },
+      {
+        "seat": "I3",
+        "status": "available"
+      },
+      {
+        "seat": "I4",
+        "status": "available"
+      },
+      {
+        "seat": "I5",
+        "status": "available"
+      },
+      {
+        "seat": "I6",
+        "status": "available"
+      },
+      {
+        "seat": "I7",
+        "status": "available"
+      },
+      {
+        "seat": "I8",
+        "status": "available"
+      },
+      {
+        "seat": "I9",
+        "status": "available"
+      },
+      {
+        "seat": "J1",
+        "status": "available"
+      },
+      {
+        "seat": "J2",
+        "status": "available"
+      },
+      {
+        "seat": "J3",
+        "status": "available"
+      },
+      {
+        "seat": "J4",
+        "status": "available"
+      },
+      {
+        "seat": "J5",
+        "status": "available"
+      },
+      {
+        "seat": "J6",
+        "status": "available"
+      },
+      {
+        "seat": "J7",
+        "status": "available"
+      },
+      {
+        "seat": "J8",
+        "status": "available"
+      },
+      {
+        "seat": "J9",
+        "status": "available"
+      },
+      {
+        "seat": "K1",
+        "status": "available"
+      },
+      {
+        "seat": "K2",
+        "status": "available"
+      },
+      {
+        "seat": "K3",
+        "status": "available"
+      },
+      {
+        "seat": "K4",
+        "status": "available"
+      },
+      {
+        "seat": "K5",
+        "status": "available"
+      },
+      {
+        "seat": "K6",
+        "status": "available"
+      },
+      {
+        "seat": "K7",
+        "status": "available"
+      },
+      {
+        "seat": "K8",
+        "status": "available"
+      },
+      {
+        "seat": "K9",
+        "status": "available"
+      },
+      {
+        "seat": "L1",
+        "status": "available"
+      },
+      {
+        "seat": "L2",
+        "status": "available"
+      },
+      {
+        "seat": "L3",
+        "status": "available"
+      },
+      {
+        "seat": "L4",
+        "status": "available"
+      },
+      {
+        "seat": "L5",
+        "status": "available"
+      },
+      {
+        "seat": "L6",
+        "status": "available"
+      },
+      {
+        "seat": "L7",
+        "status": "available"
+      },
+      {
+        "seat": "L8",
+        "status": "available"
+      },
+      {
+        "seat": "L9",
+        "status": "available"
+      }
+    ]
+  },
+  {
+    "_id": "64dedf4e9b5f1f7b0f8ae005",
+    "date": "01",
+    "day": "Sunday",
+    "price": 6.11,
+    "type": "2D",
+    "time": "20:30",
+    "seats": [
+      {
+        "seat": "M1",
+        "status": "available"
+      },
+      {
+        "seat": "M2",
+        "status": "available"
+      },
+      {
+        "seat": "M3",
+        "status": "available"
+      },
+      {
+        "seat": "M4",
+        "status": "available"
+      },
+      {
+        "seat": "M5",
+        "status": "available"
+      },
+      {
+        "seat": "N1",
+        "status": "available"
+      },
+      {
+        "seat": "N2",
+        "status": "available"
+      },
+      {
+        "seat": "N3",
+        "status": "available"
+      },
+      {
+        "seat": "N4",
+        "status": "available"
+      },
+      {
+        "seat": "N5",
+        "status": "available"
+      },
+      {
+        "seat": "N6",
+        "status": "available"
+      },
+      {
+        "seat": "N7",
+        "status": "available"
+      },
+      {
+        "seat": "O1",
+        "status": "available"
+      },
+      {
+        "seat": "O2",
+        "status": "available"
+      },
+      {
+        "seat": "O3",
+        "status": "available"
+      },
+      {
+        "seat": "O4",
+        "status": "available"
+      },
+      {
+        "seat": "O5",
+        "status": "available"
+      },
+      {
+        "seat": "O6",
+        "status": "available"
+      },
+      {
+        "seat": "O7",
+        "status": "available"
+      },
+      {
+        "seat": "O8",
+        "status": "available"
+      },
+      {
+        "seat": "O9",
+        "status": "available"
+      },
+      {
+        "seat": "P1",
+        "status": "available"
+      },
+      {
+        "seat": "P2",
+        "status": "available"
+      },
+      {
+        "seat": "P3",
+        "status": "available"
+      },
+      {
+        "seat": "P4",
+        "status": "available"
+      },
+      {
+        "seat": "P5",
+        "status": "available"
+      },
+      {
+        "seat": "P6",
+        "status": "available"
+      },
+      {
+        "seat": "P7",
+        "status": "available"
+      },
+      {
+        "seat": "P8",
+        "status": "available"
+      },
+      {
+        "seat": "P9",
+        "status": "available"
+      },
+      {
+        "seat": "Q1",
+        "status": "available"
+      },
+      {
+        "seat": "Q2",
+        "status": "available"
+      },
+      {
+        "seat": "Q3",
+        "status": "available"
+      },
+      {
+        "seat": "Q4",
+        "status": "available"
+      },
+      {
+        "seat": "Q5",
+        "status": "available"
+      },
+      {
+        "seat": "Q6",
+        "status": "available"
+      },
+      {
+        "seat": "Q7",
+        "status": "available"
+      },
+      {
+        "seat": "Q8",
+        "status": "available"
+      },
+      {
+        "seat": "Q9",
+        "status": "available"
+      },
+      {
+        "seat": "R1",
+        "status": "available"
+      },
+      {
+        "seat": "R2",
+        "status": "available"
+      },
+      {
+        "seat": "R3",
+        "status": "available"
+      },
+      {
+        "seat": "R4",
+        "status": "reserved"
+      },
+      {
+        "seat": "R5",
+        "status": "available"
+      },
+      {
+        "seat": "R6",
+        "status": "available"
+      },
+      {
+        "seat": "R7",
+        "status": "available"
+      },
+      {
+        "seat": "R8",
+        "status": "available"
+      },
+      {
+        "seat": "R9",
+        "status": "available"
+      }
+    ]
+  },
+  {
+    "_id": "64dedf4e9b5f1f7b0f8a2cbd",
+    "date": "01",
+    "day": "Sunday",
+    "price": 6.32,
+    "type": "3D",
+    "time": "23:15",
+    "seats": [
+      {
+        "seat": "A1",
+        "status": "available"
+      },
+      {
+        "seat": "A2",
+        "status": "available"
+      },
+      {
+        "seat": "A3",
+        "status": "available"
+      },
+      {
+        "seat": "A4",
+        "status": "available"
+      },
+      {
+        "seat": "A5",
+        "status": "available"
+      },
+      {
+        "seat": "B1",
+        "status": "available"
+      },
+      {
+        "seat": "B2",
+        "status": "available"
+      },
+      {
+        "seat": "B3",
+        "status": "available"
+      },
+      {
+        "seat": "B4",
+        "status": "available"
+      },
+      {
+        "seat": "B5",
+        "status": "available"
+      },
+      {
+        "seat": "B6",
+        "status": "available"
+      },
+      {
+        "seat": "B7",
+        "status": "available"
+      },
+      {
+        "seat": "C1",
+        "status": "available"
+      },
+      {
+        "seat": "C2",
+        "status": "available"
+      },
+      {
+        "seat": "C3",
+        "status": "available"
+      },
+      {
+        "seat": "C4",
+        "status": "available"
+      },
+      {
+        "seat": "C5",
+        "status": "available"
+      },
+      {
+        "seat": "C6",
+        "status": "available"
+      },
+      {
+        "seat": "C7",
+        "status": "available"
+      },
+      {
+        "seat": "C8",
+        "status": "available"
+      },
+      {
+        "seat": "C9",
+        "status": "available"
+      },
+      {
+        "seat": "D1",
+        "status": "available"
+      },
+      {
+        "seat": "D2",
+        "status": "available"
+      },
+      {
+        "seat": "D3",
+        "status": "available"
+      },
+      {
+        "seat": "D4",
+        "status": "available"
+      },
+      {
+        "seat": "D5",
+        "status": "available"
+      },
+      {
+        "seat": "D6",
+        "status": "available"
+      },
+      {
+        "seat": "D7",
+        "status": "available"
+      },
+      {
+        "seat": "D8",
+        "status": "available"
+      },
+      {
+        "seat": "D9",
+        "status": "available"
+      },
+      {
+        "seat": "E1",
+        "status": "available"
+      },
+      {
+        "seat": "E2",
+        "status": "available"
+      },
+      {
+        "seat": "E3",
+        "status": "available"
+      },
+      {
+        "seat": "E4",
+        "status": "available"
+      },
+      {
+        "seat": "E5",
+        "status": "available"
+      },
+      {
+        "seat": "E6",
+        "status": "available"
+      },
+      {
+        "seat": "E7",
+        "status": "available"
+      },
+      {
+        "seat": "E8",
+        "status": "available"
+      },
+      {
+        "seat": "E9",
+        "status": "available"
+      },
+      {
+        "seat": "F1",
+        "status": "available"
+      },
+      {
+        "seat": "F2",
+        "status": "reserved"
+      },
+      {
+        "seat": "F3",
+        "status": "available"
+      },
+      {
+        "seat": "F4",
+        "status": "available"
+      },
+      {
+        "seat": "F5",
+        "status": "available"
+      },
+      {
+        "seat": "F6",
+        "status": "reserved"
+      },
+      {
+        "seat": "F7",
+        "status": "available"
+      },
+      {
+        "seat": "F8",
+        "status": "available"
+      },
+      {
+        "seat": "F9",
+        "status": "reserved"
+      }
+    ]
+  }
+]
+```
+
+![image-20240902102410853](/home/camper/.config/Typora/typora-user-images/image-20240902102410853.png)
+
+**Method** : `POST`
+
+**URL** : http://localhost:5069/seats/:showId/seatsToReserve
+
+## Success Responses
+
+```js
+{
+"showId": "64dedf4e9b5f1f7b0f8a2c8a",
+"seatsToReserve": "C9"
+}
+```
+
+```js
+{
+"acknowledged": true,
+"modifiedCount": 1,
+"upsertedId": null,
+"upsertedCount": 0,
+"matchedCount": 1
+}
+```
+
+![image-20240902102634139](/home/camper/.config/Typora/typora-user-images/image-20240902102634139.png)
+
+
+
+**Method** : `DELETE`
+
+**URL** : http://localhost:5069//seats/:showId/seats/:seatId/remove'
+
+## Success Responses
+
+```JS
+{
+"acknowledged": true,
+"modifiedCount": 1,
+"upsertedId": null,
+"upsertedCount": 0,
+"matchedCount": 1
+}
+```
+
+**TICKETS**
+
+**Method** : `GET`
+
+**URL** : http://localhost:5069/factura?day=Monday&time=11:30&room=Cinema%20A&seats=R5&price=5.53&movieImage=https%3A%2F%2Fmycima.lol%2Fwp-content%2Fuploads%2F2023%2F11%2FMV5BNjQwOGM2YTItMGYwNC00YTM4LWI0Y2QtZjQ2ZDcyMmRjMTFhXkEyXkFqcGdeQXVyMDM2NDM2MQ%40%40-scaled.jpg&movieName=Killers%20Of%20The%20Flower%20Moon
+
+![image-20240902103129943](/home/camper/.config/Typora/typora-user-images/image-20240902103129943.png)
+
+
+
 📕 **Título: CineCampus**
 
 ------
