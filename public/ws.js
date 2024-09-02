@@ -266,58 +266,172 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('No movieId provided in the URL');
     }
 });
+// Variable para controlar si ya se ha cargado la información
+let isMovieDetailsLoaded = false;
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Verifica si el ID de la película está disponible en algún lugar, como en una URL de consulta
+    const urlParams = new URLSearchParams(window.location.search);
+    const movieId = urlParams.get('movieId');
+
+    if (movieId) {
+        fetchMovieDetails(movieId);
+    } else {
+        console.error('No movieId found in the URL');
+    }
+
+    // Manejar el botón de retroceso
+    const backArrow = document.querySelector('.back-arrow-especific');
+    if (backArrow) {
+        backArrow.addEventListener('click', function() {
+            window.location.href = 'http://localhost:5069/home';
+        });
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Verifica si el ID de la película está disponible en la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const movieId = urlParams.get('movieId');
+
+    if (movieId) {
+        fetchMovieDetails(movieId);
+    } else {
+        console.error('No movieId found in the URL');
+        // Maneja el caso en el que no se encuentra el ID de la película
+        displayError('Movie ID not found.');
+    }
+
+    // Manejar el botón de retroceso
+    const backArrow = document.querySelector('.back-arrow-especific');
+    if (backArrow) {
+        backArrow.addEventListener('click', function() {
+            window.location.href = 'http://localhost:5069/home';
+        });
+    }
+});
 
 function fetchMovieDetails(movieId) {
-    fetch(`http://localhost:5069/movies/${movieId}`)
-        .then(response => response.json())
-        .then(data => {
-            // Establecer la imagen de la película
-            const movieImage = document.querySelector('.movie-image');
-            if (movieImage) {
-                movieImage.src = data.movie_image || 'https://via.placeholder.com/300x450?text=No+Poster';
-                movieImage.alt = data.name;
-            }
+    const movieImage = document.querySelector('.movie-image');
+    const titleElement = document.querySelector('.movie-title');
+    const trailerBtn = document.querySelector('.watch-trailer-btn');
+    const descriptionElement = document.querySelector('.description');
+    const castContainer = document.querySelector('.cast-container');
 
-            // Establecer el título de la película
-            const titleElement = document.querySelector('.movie-title');
-            if (titleElement) {
-                titleElement.textContent = data.name || 'Unknown Title';
-            }
+    // Mostrar indicador de carga
+    displayLoading();
 
-            // Configurar el botón "Watch Trailer" para redirigir al trailer
-            const trailerBtn = document.querySelector('.watch-trailer-btn');
-            if (trailerBtn && data.trailer) {
-                trailerBtn.addEventListener('click', () => {
-                    window.location.href = data.trailer;
-                });
-            }
+    // Función para manejar el reintento
+    function fetchWithRetry(attempts) {
+        fetch(`http://localhost:5069/movieselected/${movieId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                displayData(data);
+            })
+            .catch(error => {
+                console.error('Error fetching movie details:', error);
+                if (attempts > 0) {
+                    // Reintentar después de un breve retraso
+                    setTimeout(() => fetchWithRetry(attempts - 1), 3000);
+                } else {
+                    // Mostrar error si se agotaron los intentos
+                    displayError('Failed to load movie details.');
+                }
+            });
+    }
 
-            // Establecer la sinopsis
-            const descriptionElement = document.querySelector('.description');
-            if (descriptionElement) {
-                descriptionElement.textContent = data.synopsis || 'No synopsis available.';
-            }
-
-            // Popular el reparto
-            const castContainer = document.querySelector('.cast-container');
-            if (castContainer && Array.isArray(data.cast)) {
-                castContainer.innerHTML = ''; // Limpiar el contenido existente
-                data.cast.forEach(actor => {
-                    const actorElement = document.createElement('div');
-                    actorElement.classList.add('profile');
-                    actorElement.innerHTML = `
-                        <img src="${actor.actor_image || 'https://via.placeholder.com/150'}" alt="${actor.name}">
-                        <div class="text-container">
-                            <p>${actor.name || 'Unknown Actor'}</p>
-                            <p>${actor.character || 'Unknown Character'}</p>
-                        </div>
-                    `;
-                    castContainer.appendChild(actorElement);
-                });
-            }
-        })
-        .catch(error => console.error('Error fetching movie details:', error));
+    fetchWithRetry(3); // Intentar hasta 3 veces
 }
+
+function displayLoading() {
+    const movieImage = document.querySelector('.movie-image');
+    const titleElement = document.querySelector('.movie-title');
+    const trailerBtn = document.querySelector('.watch-trailer-btn');
+    const descriptionElement = document.querySelector('.description');
+    const castContainer = document.querySelector('.cast-container');
+
+    if (movieImage) movieImage.src = 'https://via.placeholder.com/300x450?text=Loading...';
+    if (titleElement) titleElement.textContent = 'Loading...';
+    if (descriptionElement) descriptionElement.textContent = 'Loading...';
+    if (castContainer) castContainer.innerHTML = '<p>Loading...</p>';
+}
+
+function displayData(data) {
+    const movieImage = document.querySelector('.movie-image');
+    const titleElement = document.querySelector('.movie-title');
+    const trailerBtn = document.querySelector('.watch-trailer-btn');
+    const descriptionElement = document.querySelector('.description');
+    const castContainer = document.querySelector('.cast-container');
+
+    if (movieImage) {
+        movieImage.src = data.movie_image || 'https://via.placeholder.com/300x450?text=No+Poster';
+        movieImage.alt = data.name || 'Movie Poster';
+    }
+
+    if (titleElement) {
+        titleElement.textContent = data.name || 'Unknown Title';
+    }
+
+    if (trailerBtn) {
+        if (data.trailer) {
+            trailerBtn.style.display = 'block';
+            trailerBtn.addEventListener('click', () => {
+                window.location.href = data.trailer;
+            });
+        } else {
+            trailerBtn.style.display = 'none';
+        }
+    }
+
+    if (descriptionElement) {
+        descriptionElement.textContent = data.synopsis || 'No synopsis available.';
+    }
+
+    if (castContainer && Array.isArray(data.cast)) {
+        castContainer.innerHTML = '';
+        data.cast.forEach(actor => {
+            const actorElement = document.createElement('div');
+            actorElement.classList.add('profile');
+            actorElement.innerHTML = `
+                <img src="${actor.actor_image || 'https://via.placeholder.com/150'}" alt="${actor.name || 'Unknown Actor'}">
+                <div class="text-container">
+                    <p>${actor.name || 'Unknown Actor'}</p>
+                    <p>${actor.character || 'Unknown Character'}</p>
+                </div>
+            `;
+            castContainer.appendChild(actorElement);
+        });
+    } else if (castContainer) {
+        castContainer.innerHTML = '<p>No cast information available.</p>';
+    }
+}
+
+function displayError(message) {
+    const movieImage = document.querySelector('.movie-image');
+    const titleElement = document.querySelector('.movie-title');
+    const trailerBtn = document.querySelector('.watch-trailer-btn');
+    const descriptionElement = document.querySelector('.description');
+    const castContainer = document.querySelector('.cast-container');
+
+    if (movieImage) movieImage.src = 'https://via.placeholder.com/300x450?text=Error+Loading+Image';
+    if (titleElement) titleElement.textContent = message;
+    if (descriptionElement) descriptionElement.textContent = 'Error Loading Description';
+    if (castContainer) castContainer.innerHTML = '<p>Error Loading Cast Information</p>';
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const backArrow = document.querySelector('.back-arrow-especific');
+    if (backArrow) {
+        backArrow.addEventListener('click', function() {
+            window.location.href = 'http://localhost:5069/home';
+        });
+    }
+});
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -375,3 +489,16 @@ data.forEach((movie, index) => {
         updateMovieInfo(0);
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const backArrow = document.querySelector('.back-arrow-especific');
+    if (backArrow) {
+    backArrow.addEventListener('click', () => {
+    window.location.href = 'http://localhost:5069/home';
+    });
+    }
+    
+    // Llamar a la función para obtener detalles de la película
+    const movieId = /* Recupera el movieId dinámicamente si es necesario */
+    fetchMovieDetails(movieId);
+    });
